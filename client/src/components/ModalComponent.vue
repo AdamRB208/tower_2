@@ -1,4 +1,6 @@
 <script setup>
+import TowerEventForm from './TowerEventForm.vue';
+
 
 </script>
 
@@ -12,7 +14,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div>form here</div>
+          <TowerEventForm />
         </div>
       </div>
     </div>

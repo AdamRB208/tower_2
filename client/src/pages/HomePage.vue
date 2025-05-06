@@ -7,6 +7,7 @@ import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted, ref } from 'vue';
 
+const account = computed(() => AppState.account)
 
 const towerEvent = computed(() => {
   if (filterCategory.value == 'all') {
@@ -77,8 +78,9 @@ async function getTowerEvents() {
       <div class="col-md-5 info-card border border-3 border-dark-subtle shadow m-3 p-2">
         <h3>Start an event to invite your friends</h3>
         <p>Create your own Tower event, and draw form a community of millions</p>
-        <button class="btn btn-outline-success shadow text-shadow" role="button" title="Create new tower event"
-          data-bs-toggle="modal" data-bs-target="#ModalComponent">Create an event</button>
+        <button v-if="account" class="btn btn-outline-success shadow text-shadow" role="button"
+          title="Create new tower event" data-bs-toggle="modal" data-bs-target="#ModalComponent">Create an
+          event</button>
       </div>
     </div>
     <div class="row justify-content-between">
