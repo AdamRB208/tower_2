@@ -17,10 +17,10 @@ watch(theme, () => {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-md bg-codeworks border-bottom border-vue">
+  <nav class="navbar navbar-expand-md bg-vue border-bottom border-vue">
     <div class="container gap-2">
       <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light">
-        <b class="fs-5"><i class="mdi mdi-eiffel-tower fs-2"></i>Tower</b>
+        <b class="fs-5 text-codeworks"><i class="mdi mdi-eiffel-tower fs-2 text-codeworks"></i>Tower</b>
       </RouterLink>
       <!-- collapse button -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-links"
@@ -40,8 +40,8 @@ watch(theme, () => {
         <div class="ms-auto">
           <button class="btn text-light" @click="toggleTheme"
             :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
-            <i v-if="theme == 'dark'" class="mdi mdi-weather-sunny"></i>
-            <i v-if="theme == 'light'" class="mdi mdi-weather-night"></i>
+            <i v-if="theme == 'dark'" class="mdi mdi-weather-sunny text-codeworks"></i>
+            <i v-if="theme == 'light'" class="mdi mdi-weather-night text-codeworks"></i>
           </button>
         </div>
         <Login />
