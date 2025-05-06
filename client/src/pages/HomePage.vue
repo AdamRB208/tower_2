@@ -4,11 +4,35 @@ import TowerEventsCard from '@/components/TowerEventsCard.vue';
 import { towerEventsService } from '@/services/TowerEventsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 
-const towerEvent = computed(() => AppState.towerEvent)
+const towerEvent = computed(() => {
+  if (filterCategory.value == 'all') {
+    return AppState.towerEvent
+  }
+  return AppState.towerEvent.filter(towerEvent => towerEvent.type == filterCategory.value)
+})
 
+const filterCategory = ref('all')
+
+const categories = [
+  {
+    name: 'all'
+  },
+  {
+    name: 'concert'
+  },
+  {
+    name: 'convention'
+  },
+  {
+    name: 'sport'
+  },
+  {
+    name: 'digital'
+  },
+]
 
 onMounted(() => {
   getTowerEvents()
@@ -41,6 +65,13 @@ async function getTowerEvents() {
         </div>
       </div>
     </div>
+    <div class="row justify-content-between">
+      <div v-for="type in categories" :key="'filter ' + type.name" class="col-md-2 d-flex">
+        <div @click="filterCategory = type.name"
+          class="p-2 m-3 fs-4 border border-2 rounded-2 shadow category-btn text-center" role="button">{{
+            type.name }}</div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-12">
         <h2>Upcoming Events</h2>
@@ -66,5 +97,9 @@ async function getTowerEvents() {
 
 .header-card {
   background-color: rgba(255, 255, 255, 0.54);
+}
+
+.category-btn {
+  width: 8rem;
 }
 </style>
