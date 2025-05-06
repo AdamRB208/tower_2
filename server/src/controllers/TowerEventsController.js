@@ -6,6 +6,7 @@ export class TowerEventsController extends BaseController {
     super('api/events')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .post('', this.createTowerEvent)
 
   }
 
