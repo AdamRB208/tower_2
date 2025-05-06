@@ -1,6 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
-import { TowerEvent } from '@/models/TowerEvent.js';
+import TowerEventsCard from '@/components/TowerEventsCard.vue';
 import { towerEventsService } from '@/services/TowerEventsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
@@ -42,8 +42,11 @@ async function getTowerEvents() {
       </div>
     </div>
     <div class="row">
-      <div v-if="towerEvent" class="col-12">
-        {{ towerEvent }}
+      <div class="col-12">
+        <h2>Upcoming Events</h2>
+      </div>
+      <div v-for="towerEvent in towerEvent" :key="towerEvent.id" class="col-md-3">
+        <TowerEventsCard :towerEvent="towerEvent" />
       </div>
     </div>
   </section>
