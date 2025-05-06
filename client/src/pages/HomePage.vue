@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import ModalComponent from '@/components/ModalComponent.vue';
 import TowerEventsCard from '@/components/TowerEventsCard.vue';
 import { towerEventsService } from '@/services/TowerEventsService.js';
 import { logger } from '@/utils/Logger.js';
@@ -18,19 +19,19 @@ const filterCategory = ref('all')
 
 const categories = [
   {
-    name: 'all'
+    name: 'All'
   },
   {
-    name: 'concert'
+    name: 'Concert'
   },
   {
-    name: 'convention'
+    name: 'Convention'
   },
   {
-    name: 'sport'
+    name: 'Sport'
   },
   {
-    name: 'digital'
+    name: 'Digital'
   },
 ]
 
@@ -65,6 +66,21 @@ async function getTowerEvents() {
         </div>
       </div>
     </div>
+    <div class="row justify-content-center text-center">
+      <div class="col-md-5 fs-2 mt-3">How Tower Works</div>
+    </div>
+    <div class="row justify-content-evenly">
+      <div class="col-md-5 info-card border border-3 border-dark-subtle shadow m-3 p-2">
+        <h3>Discover events your interested in</h3>
+        <p>Browse through community hosted events for all the things you love</p>
+      </div>
+      <div class="col-md-5 info-card border border-3 border-dark-subtle shadow m-3 p-2">
+        <h3>Start an event to invite your friends</h3>
+        <p>Create your own Tower event, and draw form a community of millions</p>
+        <button class="btn btn-outline-success shadow text-shadow" role="button" title="Create new tower event"
+          data-bs-toggle="modal" data-bs-target="#ModalComponent">Create an event</button>
+      </div>
+    </div>
     <div class="row justify-content-between">
       <div v-for="type in categories" :key="'filter ' + type.name" class="col-md-2 d-flex">
         <div @click="filterCategory = type.name"
@@ -81,6 +97,7 @@ async function getTowerEvents() {
       </div>
     </div>
   </section>
+  <ModalComponent />
 </template>
 
 <style scoped lang="scss">
@@ -100,6 +117,12 @@ async function getTowerEvents() {
 }
 
 .category-btn {
-  width: 8rem;
+  width: 9rem;
+}
+
+.info-card {
+  background-color: #8c8a8fc8;
+  border-width: 6px;
+  border-color: black;
 }
 </style>
