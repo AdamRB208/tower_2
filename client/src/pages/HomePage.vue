@@ -1,13 +1,16 @@
-<script setup >
-import Example from '@/components/Example.vue';
+<script setup>
 
 
 </script>
 
 <template>
-  <Example />
+  <section class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div>home page</div>
+      </div>
+    </div>
+  </section>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
