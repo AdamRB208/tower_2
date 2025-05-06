@@ -1,5 +1,28 @@
 <script setup>
+import { AppState } from '@/AppState.js';
+import { TowerEvent } from '@/models/TowerEvent.js';
+import { towerEventsService } from '@/services/TowerEventsService.js';
+import { logger } from '@/utils/Logger.js';
+import { Pop } from '@/utils/Pop.js';
+import { computed, onMounted } from 'vue';
 
+
+const towerEvent = computed(() => AppState.towerEvent)
+
+
+onMounted(() => {
+  getTowerEvents()
+})
+
+async function getTowerEvents() {
+  try {
+    await towerEventsService.getTowerEvents()
+  }
+  catch (error) {
+    Pop.error(error, 'Could not get Tower Events!');
+    logger.log('COULD NOT GET TOWER EVENTS!', error)
+  }
+}
 
 </script>
 
@@ -19,8 +42,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
-        events cards here
+      <div v-if="towerEvent" class="col-12">
+        {{ towerEvent }}
       </div>
     </div>
   </section>
