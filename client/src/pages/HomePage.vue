@@ -18,6 +18,11 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-3">
+        events cards here
+      </div>
+    </div>
   </section>
 </template>
 
