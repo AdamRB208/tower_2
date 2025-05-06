@@ -6,7 +6,7 @@ import { TowerEventsSchema } from '../models/TowerEvents.js';
 class DbContext {
   Values = mongoose.model('Value', ValueSchema);
   Account = mongoose.model('Account', AccountSchema);
-  TowerEvents = mongoose.model('TowerEvents', TowerEventsSchema);
+  TowerEvents = mongoose.model('TowerEvent', TowerEventsSchema);
 }
 
 export const dbContext = new DbContext()
