@@ -8,7 +8,7 @@ export const TowerEventsSchema = new Schema({
   location: { type: String, required: true, minLength: 1, maxLength: 500 },
   capacity: { type: Number, required: true, min: 1, max: 5000 },
   startDate: { type: Date, required: true },
-  isCanceled: { type: Boolean, required: true },
+  isCanceled: { type: Boolean, required: false },
   type: { type: String, required: true, enum: ['concert', 'convention', 'sport', 'digital'] },
 },
   {
@@ -16,3 +16,10 @@ export const TowerEventsSchema = new Schema({
     toJSON: { virtuals: true, versionKey: false },
   }
 )
+
+TowerEventsSchema.virtual('creator', {
+  localField: 'creatorId',
+  foreignField: '_id',
+  ref: 'Events',
+  justOne: true
+})
