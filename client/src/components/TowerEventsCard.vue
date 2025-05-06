@@ -10,7 +10,9 @@ defineProps({
 
 <template>
   <div class="event-card border border-dark-subtle border-3 shadow mb-4">
-    <img :src="towerEvent.coverImg" :alt="'cover image for ' + towerEvent.name">
+    <RouterLink :to="{ name: 'Events', params: { towerEventId: towerEvent.id } }">
+      <img :src="towerEvent.coverImg" :alt="'cover image for ' + towerEvent.name" type="button">
+    </RouterLink>
     <div class="p-1">
       <h5>{{ towerEvent.name }}</h5>
       <p>Hosted By: {{ towerEvent.creator.name }}</p>
