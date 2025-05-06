@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { towerEventsService } from '@/services/TowerEventsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
@@ -22,6 +23,8 @@ async function getTowerEventById() {
   try {
     const towerEventId = route.params.towerEventId
     logger.log('Tower Event Id', towerEventId)
+    await towerEventsService.getTowerEventById(towerEventId)
+    logger.log(towerEvent)
   }
   catch (error) {
     Pop.error(error, 'Could not get Tower Event by ID!');
@@ -33,7 +36,7 @@ async function getTowerEventById() {
 
 
 <template>
-  <div>{{ towerEvent }}</div>
+  <div v-if="towerEvent">{{ towerEvent }}</div>
 </template>
 
 
