@@ -10,6 +10,8 @@ export class TowerEventsController extends BaseController {
       .get('/:towerEventId', this.getTowerEventById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTowerEvent)
+      .put('/:towerEventId', this.editTowerEvent)
+      .delete('/:towerEventId', this.archiveTowerEvent)
 
   }
 
@@ -59,6 +61,39 @@ export class TowerEventsController extends BaseController {
     }
     catch (error) {
       next(error);
+    }
+  }
+
+  /**
+   * @param {import("express").Request} request
+   * @param {import("express").Response} response
+   * @param {import("express").NextFunction} next
+   */
+  async editTowerEvent(request, response, next) {
+    try {
+      const towerEventId = request.params.towerEventId
+      const towerEventToUpdate = request.body
+      const userInfo = request.userInfo
+      const towerEvent = await towerEventsService.editTowerEvent(towerEventId, userInfo, towerEventToUpdate)
+      response.send(towerEvent)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+   * @param {import("express").Request} request
+   * @param {import("express").Response} response
+   * @param {import("express").NextFunction} next
+   */
+  async archiveTowerEvent(request, response, next) {
+    try {
+      const towerEventId = request.params.towerEventId
+      const userInfo = request.userInfo
+      const message = await towerEventsService.archiveTowerEvent(towerEventId, userInfo)
+      response.send(message)
+    } catch (error) {
+      next(error)
     }
   }
 }
