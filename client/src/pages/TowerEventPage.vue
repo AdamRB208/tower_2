@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { ticketService } from '@/services/TicketsService.js';
 import { towerEventsService } from '@/services/TowerEventsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
@@ -11,6 +12,7 @@ import { useRoute } from 'vue-router';
 const towerEvent = computed(() => AppState.activeTowerEvent)
 
 const account = computed(() => AppState.account)
+
 
 const route = useRoute()
 
@@ -46,6 +48,17 @@ async function cancelTowerEvent() {
     logger.log('COULD NOT CANCEL TOWER EVENT!', error)
   }
 }
+
+async function createTicket() {
+  try {
+    const ticketData = { eventId: route.params.towerEventId }
+    await ticketService.createTicket(ticketData)
+  } catch (error) {
+    Pop.error(error, 'Could not create Ticket')
+    logger.log('COULD NOT CREATE TICKET!', error)
+  }
+}
+
 
 </script>
 
@@ -92,7 +105,7 @@ async function cancelTowerEvent() {
             <span>Tickets left : {{ towerEvent.capacity - towerEvent.ticketCount }}</span>
           </div>
           <!-- TODO dont show this if the event is cancelled or sold out -->
-          <button v-if="account" class="btn btn-success">
+          <button @click="createTicket()" v-if="account" class="btn btn-success" type="button">
             <span class="mdi mdi-account-plus d-block"></span>
             <span>Attend</span>
           </button>
