@@ -32,6 +32,21 @@ async function getTowerEventById() {
   }
 }
 
+async function cancelTowerEvent() {
+  try {
+    const confirmed = await Pop.confirm(`Are you sure you want to ${towerEvent.value.isCanceled ? 'un-cancel' : 'cancel'} ${towerEvent.value.name}?`)
+    if (!confirmed) {
+      return
+    }
+    const towerEventId = route.params.towerEventId
+    await towerEventsService.cancelTowerEvent(towerEventId)
+  }
+  catch (error) {
+    Pop.error(error, 'Could not cancel Tower Event!');
+    logger.log('COULD NOT CANCEL TOWER EVENT!', error)
+  }
+}
+
 </script>
 
 
@@ -61,7 +76,8 @@ async function getTowerEventById() {
           <p class="mdi mdi-map-marker-outline">{{ towerEvent.location }}</p>
         </div>
         <div>
-          <button v-if="towerEvent.creatorId == account?.id" class="btn btn-danger rounded-pill text-light">
+          <button @click="cancelTowerEvent()" v-if="towerEvent.creatorId == account?.id"
+            class="btn btn-danger rounded-pill text-light">
             {{ towerEvent.isCanceled ? 'Un-cancel' : 'Cancel Event' }} <span class="mdi"
               :class="towerEvent.isCanceled ? 'mdi-publish' : 'mdi-close-circle'"> </span>
           </button>
