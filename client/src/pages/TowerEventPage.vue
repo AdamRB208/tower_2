@@ -13,6 +13,9 @@ const towerEvent = computed(() => AppState.activeTowerEvent)
 
 const account = computed(() => AppState.account)
 
+const ticket = computed(() => AppState.ticket)
+
+const ticketProfile = computed(() => AppState.ticketProfile)
 
 const route = useRoute()
 
@@ -104,11 +107,12 @@ async function createTicket() {
             <span class="d-block"> </span>
             <span>Tickets left : {{ towerEvent.capacity - towerEvent.ticketCount }}</span>
           </div>
-          <!-- TODO dont show this if the event is cancelled or sold out -->
-          <button @click="createTicket()" v-if="account" class="btn btn-success" type="button">
-            <span class="mdi mdi-account-plus d-block"></span>
-            <span>Attend</span>
-          </button>
+          <div v-if="towerEvent.isCanceled == false">
+            <button @click="createTicket()" v-if="account" class="btn btn-success" type="button">
+              <span class="mdi mdi-account-plus d-block"></span>
+              <span>Attend</span>
+            </button>
+          </div>
         </div>
         <div>
         </div>
@@ -116,18 +120,17 @@ async function createTicket() {
     </div>
     <div class="row">
       <div class="col-md-3">
-        <div
+        <div v-if="towerEvent.ticketCount"
           :title="towerEvent.ticketCount + (towerEvent.ticketCount == 1 ? ' person is ' : ' people are ') + 'attending this event'">
           <span>Number of attendees: {{ towerEvent.ticketCount }}</span>
         </div>
-        <!-- <ul>
-          <li class="bg-dark text-white">These people are going:</li>
-          <li v-for="ticket in tickets" :key="ticket.id">
-
-            {{ ticket.profile.name }}
-            <img :src="account.name.picture" alt="users profile image">
-          </li>
-        </ul> -->
+        <div>
+          <div>These people are going:
+            <div v-for="ticket in ticketProfile" :key="ticket.id">
+              <img :src="ticket.profile.picture" :alt="ticket.profile.name">
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-md-9">
         <!-- TODO -->
