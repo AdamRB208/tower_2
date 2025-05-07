@@ -19,6 +19,13 @@ class TicketService {
     })
     return tickets
   }
+
+  async getTicketsByEventId(eventId) {
+    const tickets = await dbContext.Tickets.find({ eventId: eventId }).populate('profile')
+    return tickets
+  }
+
+
 }
 
 export const ticketService = new TicketService()
