@@ -1,4 +1,7 @@
 <script setup>
+import { towerEventsService } from '@/services/TowerEventsService.js';
+import { logger } from '@/utils/Logger.js';
+import { Pop } from '@/utils/Pop.js';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -14,12 +17,24 @@ const editableTowerEventData = ref({
   description: '',
   coverImg: '',
   type: '',
-})
+});
+
+async function createTowerEvent() {
+  try {
+    const towerEvent = await towerEventsService.createTowerEvent(editableTowerEventData.value)
+    router.push({ name: 'Events', params: { towerEventId: towerEvent.id } })
+    logger.log('tower event', towerEvent)
+  } catch (error) {
+    Pop.error(error, 'Could not create Tower Event')
+    logger.log('COULD NOT CREATE TOWER EVENT', error)
+  }
+}
+
 </script>
 
 
 <template>
-  <form>
+  <form @submit.prevent="createTowerEvent()">
     <div class="form-floating mb-3">
       <input v-model="editableTowerEventData.name" type="text" class="form-control" id="towerEventName"
         placeholder="Event Name..." minlength="3" maxlength="50" required>

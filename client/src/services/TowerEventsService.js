@@ -10,7 +10,15 @@ class TowerEventsService {
     logger.log('Got Tower Events!', response.data)
     const towerEvent = response.data.map(pojo => new TowerEvent(pojo))
     AppState.towerEvent = towerEvent
-    logger.log('Rendering Tower Event pojos!')
+    logger.log('Rendering Tower Events!')
+  }
+
+  async createTowerEvent(towerEventData) {
+    const response = await api.post('api/events', towerEventData)
+    logger.log('Created Tower Event!', response.data)
+    const towerEvent = new TowerEvent(response.data)
+    AppState.towerEvent.unshift(towerEvent)
+    return towerEvent
   }
 
   async getTowerEventById(towerEventId) {

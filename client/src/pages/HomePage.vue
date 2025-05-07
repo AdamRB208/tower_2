@@ -84,7 +84,7 @@ async function getTowerEvents() {
       </div>
     </div>
     <div class="row justify-content-between">
-      <div v-for="type in categories" :key="'filter ' + type.name" class="col-md-2 d-flex">
+      <div v-for="type in categories" :key="'filter' + type.name" class="col-md-2 d-flex">
         <div @click="filterCategory = type.name"
           class="p-2 m-3 fs-4 border border-2 rounded-2 shadow category-btn text-center" role="button">{{
             type.name }}</div>
