@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 
 export const TicketSchema = new Schema({
   accountId: { type: Schema.ObjectId, required: true, ref: 'Account' },
-  eventId: { type: Schema.ObjectId, required: true, ref: 'TowerEvent' },
+  eventId: { type: Schema.ObjectId, required: true, ref: 'TowerEvents' },
 },
   {
     timestamps: true,

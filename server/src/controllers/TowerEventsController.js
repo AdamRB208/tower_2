@@ -20,6 +20,7 @@ export class TowerEventsController extends BaseController {
    * @param {import("express").Response} response
    * @param {import("express").NextFunction} next
    */
+
   async getTowerEventById(request, response, next) {
     try {
       const towerEventId = request.params.towerEventId
@@ -36,6 +37,7 @@ export class TowerEventsController extends BaseController {
    * @param {import("express").Response} response
    * @param {import("express").NextFunction} next
    */
+
   async getAllTowerEvents(request, response, next) {
     try {
       const towerEvents = await towerEventsService.getAllTowerEvents()
@@ -51,6 +53,7 @@ export class TowerEventsController extends BaseController {
    * @param {import("express").Response} response
    * @param {import("express").NextFunction} next
    */
+
   async createTowerEvent(request, response, next) {
     try {
       const towerEventData = request.body
@@ -69,6 +72,7 @@ export class TowerEventsController extends BaseController {
    * @param {import("express").Response} response
    * @param {import("express").NextFunction} next
    */
+
   async editTowerEvent(request, response, next) {
     try {
       const towerEventId = request.params.towerEventId
@@ -86,6 +90,7 @@ export class TowerEventsController extends BaseController {
    * @param {import("express").Response} response
    * @param {import("express").NextFunction} next
    */
+
   async archiveTowerEvent(request, response, next) {
     try {
       const towerEventId = request.params.towerEventId
@@ -96,4 +101,6 @@ export class TowerEventsController extends BaseController {
       next(error)
     }
   }
+
+
 }
