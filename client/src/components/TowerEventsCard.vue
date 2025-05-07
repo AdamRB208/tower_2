@@ -32,7 +32,7 @@ img {
 }
 
 .event-card {
-  background-color: rgba(255, 255, 255, 0.783);
+  background-color: #8c8a8f;
 
 }
 </style>

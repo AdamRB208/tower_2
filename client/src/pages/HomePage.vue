@@ -20,19 +20,19 @@ const filterCategory = ref('all')
 
 const categories = [
   {
-    name: 'All'
+    name: 'all'
   },
   {
-    name: 'Concert'
+    name: 'concert'
   },
   {
-    name: 'Convention'
+    name: 'convention'
   },
   {
-    name: 'Sport'
+    name: 'sport'
   },
   {
-    name: 'Digital'
+    name: 'digital'
   },
 ]
 
@@ -78,7 +78,7 @@ async function getTowerEvents() {
       <div class="col-md-5 info-card border border-3 border-dark-subtle shadow m-3 p-2">
         <h3>Start an event to invite your friends</h3>
         <p>Create your own Tower event, and draw form a community of millions</p>
-        <button v-if="account" class="btn btn-outline-success shadow text-shadow" role="button"
+        <button v-if="account" class="btn btn-outline-success shadow-lg text-shadow-lg align-items-center" role="button"
           title="Create new tower event" data-bs-toggle="modal" data-bs-target="#ModalComponent">Create an
           event</button>
       </div>
@@ -86,7 +86,7 @@ async function getTowerEvents() {
     <div class="row justify-content-between">
       <div v-for="type in categories" :key="'filter' + type.name" class="col-md-2 d-flex">
         <div @click="filterCategory = type.name"
-          class="p-2 m-3 fs-4 border border-2 rounded-2 shadow category-btn text-center" role="button">{{
+          class="p-2 m-3 fs-4 rounded-2 shadow category-btn text-center btn btn-outline-vue" role="button">{{
             type.name }}</div>
       </div>
     </div>
@@ -115,7 +115,7 @@ async function getTowerEvents() {
 }
 
 .header-card {
-  background-color: rgba(255, 255, 255, 0.54);
+  background-color: #8c8a8fc8;
 }
 
 .category-btn {
@@ -123,8 +123,7 @@ async function getTowerEvents() {
 }
 
 .info-card {
-  background-color: #8c8a8fc8;
+  background-color: #8c8a8f;
   border-width: 6px;
-  border-color: black;
 }
 </style>
