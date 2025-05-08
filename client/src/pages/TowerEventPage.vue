@@ -13,8 +13,6 @@ const towerEvent = computed(() => AppState.activeTowerEvent)
 
 const account = computed(() => AppState.account)
 
-const ticket = computed(() => AppState.ticket)
-
 const ticketProfile = computed(() => AppState.ticketProfile)
 
 const route = useRoute()
@@ -126,7 +124,7 @@ async function createTicket() {
         </div>
         <div>
           <div>These people are going:
-            <div v-for="ticket in ticket" :key="ticket.id">
+            <div v-for="ticket in ticketProfile" :key="ticket.id">
               <img :src="account.picture" :alt="account.name">
             </div>
           </div>

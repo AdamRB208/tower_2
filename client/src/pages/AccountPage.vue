@@ -4,14 +4,11 @@ import { AppState } from '../AppState.js';
 import { Pop } from '@/utils/Pop.js';
 import { logger } from '@/utils/Logger.js';
 import { ticketService } from '@/services/TicketsService.js';
-import { useRoute } from 'vue-router';
 
 const account = computed(() => AppState.account)
 
-const ticketEvent = computed(() => AppState.ticketEvent)
+const ticketProfile = computed(() => AppState.ticketProfile)
 
-
-const route = useRoute()
 
 onMounted(() => {
   getMyTickets()
@@ -20,7 +17,6 @@ onMounted(() => {
 async function getMyTickets() {
   try {
     await ticketService.getMyTickets()
-    logger.log('My tickets running')
   }
   catch (error) {
     Pop.error(error, 'Could not get my tickets!');
@@ -36,6 +32,9 @@ async function getMyTickets() {
       <h1>Welcome {{ account.name }}</h1>
       <img class="rounded" :src="account.picture" alt="" />
       <p>{{ account.email }}</p>
+      <div v-for="ticket in ticketProfile" :key="ticket.id">
+        <div>{{ ticketProfile }}</div>
+      </div>
     </div>
     <div v-else>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
