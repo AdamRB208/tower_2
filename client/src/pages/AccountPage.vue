@@ -1,8 +1,32 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
+import { Pop } from '@/utils/Pop.js';
+import { logger } from '@/utils/Logger.js';
+import { ticketService } from '@/services/TicketsService.js';
+import { useRoute } from 'vue-router';
 
 const account = computed(() => AppState.account)
+
+const ticketEvent = computed(() => AppState.ticketEvent)
+
+
+const route = useRoute()
+
+onMounted(() => {
+  getMyTickets()
+})
+
+async function getMyTickets() {
+  try {
+    await ticketService.getMyTickets()
+    logger.log('My tickets running')
+  }
+  catch (error) {
+    Pop.error(error, 'Could not get my tickets!');
+    logger.log('COULD NOT GET MY TICKETS!', error)
+  }
+}
 
 </script>
 

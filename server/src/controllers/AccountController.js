@@ -10,7 +10,7 @@ export class AccountController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
       .put('', this.editUserAccount)
-      .get('/tickets', this.getTickets)
+      .get('/tickets', this.getTicketsByAccountId)
   }
 
   async getUserAccount(req, res, next) {
@@ -33,7 +33,7 @@ export class AccountController extends BaseController {
     }
   }
 
-  async getTickets(request, response, next) {
+  async getTicketsByAccountId(request, response, next) {
     try {
       const userInfo = request.userInfo
       const tickets = await ticketService.getTicketsByAccountId(userInfo.id)

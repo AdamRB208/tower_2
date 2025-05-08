@@ -12,6 +12,12 @@ class TicketsService {
     AppState.ticket.push(ticket)
   }
 
+  async getMyTickets() {
+    AppState.ticketEvent = []
+    const response = await api.get('account/tickets')
+    logger.log('Got My Tickets!', response.data)
+  }
+
 }
 
 export const ticketService = new TicketsService()

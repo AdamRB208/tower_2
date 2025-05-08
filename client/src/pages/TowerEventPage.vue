@@ -126,8 +126,8 @@ async function createTicket() {
         </div>
         <div>
           <div>These people are going:
-            <div v-for="ticket in ticketProfile" :key="ticket.id">
-              <img :src="ticket.profile.picture" :alt="ticket.profile.name">
+            <div v-for="ticket in ticket" :key="ticket.id">
+              <img :src="account.picture" :alt="account.name">
             </div>
           </div>
         </div>
