@@ -1,6 +1,6 @@
 import { logger } from "@/utils/Logger.js"
 import { api } from "./AxiosService.js"
-import { TicketProfile, Tickets } from "@/models/Tickets.js"
+import { Tickets, TicketEvent } from "@/models/Tickets.js"
 import { AppState } from "@/AppState.js"
 
 class TicketsService {
@@ -8,18 +8,19 @@ class TicketsService {
   async createTicket(ticketData) {
     const response = await api.post('api/tickets', ticketData)
     logger.log('Created Ticket!', response.data)
-    const ticket = new TicketProfile(response.data)
-    AppState.ticketProfile.push(ticket)
+    const ticket = new Tickets(response.data)
+    AppState.tickets.push(ticket)
     AppState.activeTowerEvent.ticketCount++
   }
 
   async getMyTickets() {
-    AppState.ticketProfile = []
+    AppState.ticketEvent = []
     const response = await api.get('account/tickets')
     logger.log('Got My Tickets!', response.data)
-    const ticketProfile = response.data.map(pojo => new Tickets(pojo))
-    AppState.ticketProfile = ticketProfile
-    logger.log('rendering my tickets')
+    // NOTE response data cannot be put in virtual TicketProfile must be put in Ticket.
+    const ticketEvent = response.data.map(pojo => new TicketEvent(pojo))
+    AppState.ticketEvent = ticketEvent
+    logger.log('rendering my tickets', ticketEvent)
   }
 
 }
