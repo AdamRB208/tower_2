@@ -23,6 +23,11 @@ class TicketsService {
     logger.log('rendering my tickets', ticketEvent)
   }
 
+  async getTicketByEventId(eventId) {
+    const response = await api.get(`api/events/${eventId}/tickets`)
+    logger.log('Got Tickets by Event Id', response.data)
+  }
+
 }
 
 export const ticketService = new TicketsService()

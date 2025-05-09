@@ -19,6 +19,7 @@ const route = useRoute()
 
 onMounted(() => {
   getTowerEventById()
+  getTicketsByEventId()
 })
 
 
@@ -57,6 +58,18 @@ async function createTicket() {
   } catch (error) {
     Pop.error(error, 'Could not create Ticket')
     logger.log('COULD NOT CREATE TICKET!', error)
+  }
+}
+
+async function getTicketsByEventId() {
+  try {
+    const towerEventId = route.params.towerEventId
+    logger.log('Tower Event Id', towerEventId)
+    await ticketService.getTicketByEventId(towerEventId)
+  }
+  catch (error) {
+    Pop.error(error, 'Could not get ticket by Tower Event Id');
+    logger.log('COULD NOT GET TICKET BY TOWER EVENT ID!', error)
   }
 }
 

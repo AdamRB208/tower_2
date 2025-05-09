@@ -9,7 +9,6 @@ const account = computed(() => AppState.account)
 
 const ticketEvent = computed(() => AppState.ticketEvent)
 
-const tickets = computed(() => AppState.tickets)
 
 
 onMounted(() => {
@@ -25,6 +24,8 @@ async function getMyTickets() {
     logger.log('COULD NOT GET MY TICKETS!', error)
   }
 }
+
+
 
 </script>
 
