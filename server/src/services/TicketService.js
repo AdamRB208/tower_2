@@ -1,4 +1,5 @@
 import { dbContext } from "../db/DbContext.js"
+import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TicketService {
 
@@ -25,6 +26,17 @@ class TicketService {
     return tickets
   }
 
+  async deleteTicket(ticketId, userInfo) {
+    const ticket = await dbContext.Tickets.findById(ticketId)
+    if (ticket == null) {
+      throw new BadRequest(`Invalid Id: ${ticketId}`)
+    }
+    if (ticket.accountId != userInfo.id) {
+      throw new Forbidden(`YOU CANNOT DELETE ANOTHER USERS TICKET ${userInfo.nickname.toUpperCase()}!`)
+    }
+    await ticket.deleteOne()
+    return 'You are no longer attending this event!'
+  }
 
 }
 
