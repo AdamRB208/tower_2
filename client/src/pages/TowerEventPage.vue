@@ -83,10 +83,11 @@ async function getTicketsByEventId() {
   <section v-if="towerEvent" class="container">
     <div class="row">
       <div class="col-12">
-        <img :src="towerEvent.coverImg" alt="picture of event" class="mt-5">
+        <div class="text-center fs-1">Hosted By {{ towerEvent.creator.name }}!</div>
+        <img :src="towerEvent.coverImg" alt="picture of event" class="mt-2">
         <div class="d-flex gap-5 align-items-center">
           <h1>{{ towerEvent.name }}</h1>
-          <span class="border">{{ towerEvent.type }}</span>
+          <span class="border rounded-5 p-2 bg-vue">{{ towerEvent.type }}</span>
         </div>
         <div>
           <p class="mt-4">{{ towerEvent.description }}</p>
@@ -98,7 +99,8 @@ async function getTicketsByEventId() {
         </div>
         <div>
           <p class="fs-4 mt-5">Date and Time</p>
-          <p class="mdi mdi-clipboard-text-clock-outline">{{ towerEvent.startDate }}</p>
+          <p class="mdi mdi-clipboard-text-clock-outline"> {{ towerEvent.startDate.toDateString() }} @ {{
+            towerEvent.startDate.toLocaleTimeString() }}</p>
         </div>
         <div>
           <p class="fs-4">Location</p>
@@ -110,23 +112,25 @@ async function getTicketsByEventId() {
             {{ towerEvent.isCanceled ? 'Un-cancel' : 'Cancel Event' }} <span class="mdi"
               :class="towerEvent.isCanceled ? 'mdi-publish' : 'mdi-close-circle'"> </span>
           </button>
-          <button v-if="towerEvent.capacity === towerEvent.ticketCount"
-            class="btn btn-primary rounded-pill text-light  ms-3" disabled>Sold Out</button>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-3">
-        <div class="d-flex mb-3">
-          <div class="bg-dark-glass rounded p-2 flex-grow-1">
-            <span class="d-block"> </span>
-            <span>Tickets left : {{ towerEvent.capacity - towerEvent.ticketCount }}</span>
+        <div class="mb-2">
+          <div>Event Capacity: {{ towerEvent.capacity }}</div>
+        </div>
+        <div class="d-flex mb-3 align-items-center">
+          <div class="me-2">
+            <div>Tickets left: {{ towerEvent.capacity - towerEvent.ticketCount }}</div>
           </div>
           <div v-if="towerEvent.isCanceled == false">
             <button @click.prevent="createTicket()"
-              v-if="!ticketProfile.some(ticketProfile => ticketProfile.eventId === towerEvent.id)"
-              class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend</button>
-            <button v-else class="btn btn-success btn-sm" type="button" disabled>Attending</button>
+              v-if="!ticketProfile.some(ticketProfile => ticketProfile.accountId === account.id && ticketProfile.profile.id === ticketProfile.accountId)"
+              class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend Event</button>
+            <button v-else-if="towerEvent.capacity === towerEvent.ticketCount" class="btn btn-primary btn-sm"
+              disabled>Sold Out</button>
+            <button v-else class="btn btn-success btn-sm" type="button" disabled>Attending!</button>
           </div>
         </div>
         <div>
@@ -137,10 +141,10 @@ async function getTicketsByEventId() {
       <div class="col-md-3">
         <div v-if="towerEvent.ticketCount"
           :title="towerEvent.ticketCount + (towerEvent.ticketCount == 1 ? ' person is ' : ' people are ') + 'attending this event'">
-          <span>Number of attendees: {{ towerEvent.ticketCount }}</span>
+          <div class="mb-2">Number of attendees: {{ towerEvent.ticketCount }}</div>
         </div>
         <div>
-          <div>These people are going:
+          <div>These people are attending:
             <div v-for="ticketProfile in ticketProfile" :key="ticketProfile.id" class="d-flex align-items-center m-2">
               <img :src="ticketProfile.profile.picture" alt="profile picture" class="attendee-img">
               <p class="ps-2">{{ ticketProfile.profile.name }}</p>
