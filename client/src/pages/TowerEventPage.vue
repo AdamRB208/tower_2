@@ -137,9 +137,9 @@ async function getTicketsByEventId() {
         </div>
         <div>
           <div>These people are going:
-            <div v-for="ticketProfile in ticketProfile" :key="ticketProfile.id">
-              <img :src="ticketProfile.profile.picture" alt="profile picture">
-              <p>{{ ticketProfile.profile.name }}</p>
+            <div v-for="ticketProfile in ticketProfile" :key="ticketProfile.id" class="d-flex align-items-center m-2">
+              <img :src="ticketProfile.profile.picture" alt="profile picture" class="attendee-img">
+              <p class="ps-2">{{ ticketProfile.profile.name }}</p>
             </div>
           </div>
         </div>
@@ -154,4 +154,10 @@ async function getTicketsByEventId() {
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.attendee-img {
+  height: 4em;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+</style>
