@@ -15,6 +15,8 @@ const account = computed(() => AppState.account)
 
 const ticketProfile = computed(() => AppState.ticketProfile)
 
+const tickets = computed(() => AppState.tickets)
+
 const route = useRoute()
 
 onMounted(() => {
@@ -119,10 +121,10 @@ async function getTicketsByEventId() {
             <span>Tickets left : {{ towerEvent.capacity - towerEvent.ticketCount }}</span>
           </div>
           <div v-if="towerEvent.isCanceled == false">
-            <button @click="createTicket()" v-if="account" class="btn btn-success" type="button">
-              <span class="mdi mdi-account-plus d-block"></span>
-              <span>Attend</span>
-            </button>
+            <button @click.prevent="createTicket()"
+              v-if="!ticketProfile.some(ticketProfile => ticketProfile.eventId === towerEvent.id)"
+              class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend</button>
+            <button v-else class="btn btn-success btn-sm" type="button" disabled>Attending</button>
           </div>
         </div>
         <div>
