@@ -104,12 +104,14 @@ async function getTicketsByEventId() {
           <p class="fs-4">Location</p>
           <p class="mdi mdi-map-marker-outline">{{ towerEvent.location }}</p>
         </div>
-        <div>
+        <div class="mb-4">
           <button @click="cancelTowerEvent()" v-if="towerEvent.creatorId == account?.id"
             class="btn btn-danger rounded-pill text-light">
             {{ towerEvent.isCanceled ? 'Un-cancel' : 'Cancel Event' }} <span class="mdi"
               :class="towerEvent.isCanceled ? 'mdi-publish' : 'mdi-close-circle'"> </span>
           </button>
+          <button v-if="towerEvent.capacity === towerEvent.ticketCount"
+            class="btn btn-primary rounded-pill text-light  ms-3" disabled>Sold Out</button>
         </div>
       </div>
     </div>
