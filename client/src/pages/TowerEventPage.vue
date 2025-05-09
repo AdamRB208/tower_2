@@ -137,8 +137,9 @@ async function getTicketsByEventId() {
         </div>
         <div>
           <div>These people are going:
-            <div v-for="ticket in ticketProfile" :key="ticket.id">
-              <img :src="account.picture" :alt="account.name">
+            <div v-for="ticketProfile in ticketProfile" :key="ticketProfile.id">
+              <img :src="ticketProfile.profile.picture" alt="profile picture">
+              <p>{{ ticketProfile.profile.name }}</p>
             </div>
           </div>
         </div>

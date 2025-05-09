@@ -12,7 +12,7 @@ export class Tickets {
 export class TicketProfile extends Tickets {
   constructor(data) {
     super(data)
-    this.profile = new Account(data.account)
+    this.profile = new Account(data.profile)
   }
 }
 
