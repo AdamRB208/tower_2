@@ -30,6 +30,11 @@ class TicketsService {
     logger.log('rendering event tickets', ticketProfile)
   }
 
+  async deleteTicket(ticketId) {
+    const response = await api.delete(`api/tickets/${ticketId}`)
+    logger.log('Deleted Ticket!', response.data)
+  }
+
 }
 
 export const ticketService = new TicketsService()

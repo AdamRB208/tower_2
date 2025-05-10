@@ -25,7 +25,19 @@ async function getMyTickets() {
   }
 }
 
-
+async function deleteTicket(ticketId) {
+  try {
+    const confirmed = await Pop.confirm("Are you sure you want to delete this ticket?")
+    if (!confirmed) {
+      return
+    }
+    await ticketService.deleteTicket(ticketId)
+  }
+  catch (error) {
+    Pop.error(error, 'Could not delete ticket!');
+    logger.log('COULD NOT DELETE TICKET', error)
+  }
+}
 
 </script>
 
@@ -40,12 +52,13 @@ async function getMyTickets() {
         <h1 class="d-flex align-items-center ms-3">{{ account.name }}</h1>
       </div>
       <div v-for="ticketEvent in ticketEvent" :key="ticketEvent.id"
-        class="col-md-2 m-2 border border-2 border-dark-subtle">
+        class="col-md-2 m-2 border border-2 border-dark-subtle d-flex flex-column p-0">
         <img :src="ticketEvent.event.coverImg" :alt="`display image for ${ticketEvent.event.name}`"
           class="ticket-event-img">
         <div class="fw-bold text-uppercase p-1">{{ ticketEvent.event.name }}</div>
         <p class="fw-light p-1">{{ ticketEvent.event.startDate.toDateString() }}</p>
         <p class="fw-light p-1">{{ ticketEvent.event.ticketCount }} attending</p>
+        <button @click="deleteTicket()" class="btn btn-danger m-2" type="button">Delete Ticket</button>
       </div>
     </div>
     <div v-else>
@@ -61,9 +74,13 @@ async function getMyTickets() {
 
 .ticket-event-img {
   max-width: 100%;
-  min-height: 6rem;
+  height: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
-  padding: 0%;
+
+}
+
+.col-md-2 {
+  justify-content: space-evenly;
 }
 </style>
