@@ -1,5 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { CommentCreator } from '@/models/Comments.js';
+import { commentService } from '@/services/CommentService.js';
 import { ticketService } from '@/services/TicketsService.js';
 import { towerEventsService } from '@/services/TowerEventsService.js';
 import { logger } from '@/utils/Logger.js';
@@ -17,11 +19,16 @@ const ticketProfile = computed(() => AppState.ticketProfile)
 
 const tickets = computed(() => AppState.tickets)
 
+const commentCreator = computed(() => AppState.commentCreator)
+
+const comment = computed(() => AppState.comments)
+
 const route = useRoute()
 
 onMounted(() => {
   getTowerEventById()
   getTicketsByEventId()
+  getCommentsByEventId()
 })
 
 
@@ -72,6 +79,18 @@ async function getTicketsByEventId() {
   catch (error) {
     Pop.error(error, 'Could not get ticket by Tower Event Id');
     logger.log('COULD NOT GET TICKET BY TOWER EVENT ID!', error)
+  }
+}
+
+async function getCommentsByEventId() {
+  try {
+    const TowerEventId = route.params.towerEventId
+    logger.log('getting comments by eventId', TowerEventId)
+    await towerEventsService.getCommentsByEventId(TowerEventId)
+  }
+  catch (error) {
+    Pop.error(error, 'Could not get comments by event Id');
+    logger.log('COULD NOT GET COMMENTS BY EVENT ID', error)
   }
 }
 
@@ -152,10 +171,10 @@ async function getTicketsByEventId() {
           </div>
         </div>
       </div>
-      <div class="col-md-9">
+      <div v-for="commentCreator in commentCreator" :key="commentCreator.id" class="col-md-9">
         <!-- TODO -->
         <!-- COMMENTS GO HERE -->
-        <!-- {{ comment }} -->
+        {{ commentCreator.body }}
       </div>
     </div>
   </section>
