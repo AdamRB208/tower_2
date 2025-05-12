@@ -4,7 +4,7 @@ import { BadRequest, Forbidden } from "../utils/Errors.js"
 class TowerEventsService {
 
   async getAllTowerEvents() {
-    const towerEvent = await dbContext.TowerEvents.find().populate('creator ticketCount', 'name picture')
+    const towerEvent = await dbContext.TowerEvents.find().populate('creator', 'name picture').populate('ticketCount')
     return towerEvent
   }
 
@@ -15,7 +15,8 @@ class TowerEventsService {
 
   async createTowerEvent(towerEventData) {
     const towerEvent = await dbContext.TowerEvents.create(towerEventData)
-    await towerEvent.populate('creator ticketCount', 'name picture')
+    await towerEvent.populate('creator', 'name picture')
+    await towerEvent.populate('ticketCount')
     return towerEvent
   }
 
@@ -44,6 +45,7 @@ class TowerEventsService {
     }
     return towerEvent
   }
+
 }
 
 export const towerEventsService = new TowerEventsService()

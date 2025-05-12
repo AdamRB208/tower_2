@@ -2,6 +2,7 @@ import { Auth0Provider } from "@bcwdev/auth0provider";
 import BaseController from "../utils/BaseController.js"
 import { towerEventsService } from "../services/TowerEventsService.js";
 import { ticketService } from "../services/TicketService.js";
+import { commentService } from "../services/CommentService.js";
 
 export class TowerEventsController extends BaseController {
   constructor() {
@@ -10,11 +11,27 @@ export class TowerEventsController extends BaseController {
       .get('', this.getAllTowerEvents)
       .get('/:towerEventId', this.getTowerEventById)
       .get('/:eventId/tickets', this.getTicketsByEventId)
+      .get('/:eventId/comments', this.getCommentsByEventId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTowerEvent)
       .put('/:towerEventId', this.editTowerEvent)
       .delete('/:towerEventId', this.archiveTowerEvent)
 
+  }
+  /**
+   * @param {import("express").Request} request
+   * @param {import("express").Response} response
+   * @param {import("express").NextFunction} next
+   */
+
+  async getAllTowerEvents(request, response, next) {
+    try {
+      const towerEvents = await towerEventsService.getAllTowerEvents()
+      response.send(towerEvents)
+    }
+    catch (error) {
+      next(error);
+    }
   }
 
   /**
@@ -34,21 +51,6 @@ export class TowerEventsController extends BaseController {
     }
   }
 
-  /**
-   * @param {import("express").Request} request
-   * @param {import("express").Response} response
-   * @param {import("express").NextFunction} next
-   */
-
-  async getAllTowerEvents(request, response, next) {
-    try {
-      const towerEvents = await towerEventsService.getAllTowerEvents()
-      response.send(towerEvents)
-    }
-    catch (error) {
-      next(error);
-    }
-  }
 
   /**
    * @param {import("express").Request} request
@@ -115,6 +117,22 @@ export class TowerEventsController extends BaseController {
       const eventId = request.params.eventId
       const tickets = await ticketService.getTicketsByEventId(eventId)
       response.send(tickets)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+   * @param {import("express").Request} request
+   * @param {import("express").Response} response
+   * @param {import("express").NextFunction} next
+   */
+
+  async getCommentsByEventId(request, response, next) {
+    try {
+      const eventId = request.params.eventId
+      const comments = await commentService.getCommentsByEventId(eventId)
+      response.send(comments)
     } catch (error) {
       next(error)
     }
