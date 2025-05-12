@@ -171,10 +171,15 @@ async function getCommentsByEventId() {
           </div>
         </div>
       </div>
-      <div v-for="commentCreator in commentCreator" :key="commentCreator.id" class="col-md-9">
-        <!-- TODO -->
-        <!-- COMMENTS GO HERE -->
-        {{ commentCreator.body }}
+    </div>
+    <div class="row mt-4">
+      <div v-for="commentCreator in commentCreator" :key="commentCreator.id" class="col-md-9 comment-bg rounded-3 p-2">
+        <div class="d-flex d-inline align-items-center">
+          <img :src="commentCreator.creator.picture" alt="" class="creator-img">
+          <span class="ms-2">{{ commentCreator.creator.name }}</span>
+        </div>
+        <p>{{ commentCreator.body }}</p>
+        <button class="btn btn-sm btn-outline-danger comment-btn" type="button">delete</button>
       </div>
     </div>
   </section>
@@ -186,5 +191,20 @@ async function getCommentsByEventId() {
   height: 4em;
   aspect-ratio: 1/1;
   border-radius: 50%;
+}
+
+.creator-img {
+  height: 4em;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+.comment-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comment-bg {
+  background-color: #8c8a8f;
 }
 </style>
