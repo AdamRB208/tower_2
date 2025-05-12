@@ -58,7 +58,7 @@ async function deleteTicket(ticketId) {
         <div class="fw-bold text-uppercase p-1">{{ ticketEvent.event.name }}</div>
         <p class="fw-light p-1">{{ ticketEvent.event.startDate.toDateString() }}</p>
         <p class="fw-light p-1">{{ ticketEvent.event.ticketCount }} attending</p>
-        <button @click="deleteTicket()" class="btn btn-danger m-2" type="button">Delete Ticket</button>
+        <button @click="deleteTicket(ticketEvent.id)" class="btn btn-danger m-2" type="button">Delete Ticket</button>
       </div>
     </div>
     <div v-else>
