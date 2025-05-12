@@ -25,24 +25,26 @@ class TowerEventsService {
     if (towerEventToUpdate == null) {
       throw new BadRequest(`Invalid Tower Event ID: ${towerEventId}`)
     }
-    towerEventToUpdate.name = updateData.name
-    towerEventToUpdate.description = updateData.description
-
-    await towerEventToUpdate.save()
-    return towerEventToUpdate
-    if (towerEventId != userInfo.id) {
+    if (towerEventToUpdate.isCanceled == true) {
+      throw new BadRequest(`YOU CANNOT EDIT CANCELED EVENT ${towerEventId.name}!`)
+    }
+    if (towerEventToUpdate.creatorId != userInfo.id) {
       throw new Forbidden(`YOU CANNOT EDIT ANOTHER USERS EVENT ${userInfo.nickname.toUpperCase()}!`)
     }
+    towerEventToUpdate.name = updateData.name
+    towerEventToUpdate.description = updateData.description
+    await towerEventToUpdate.save()
+    return towerEventToUpdate
   }
 
   async archiveTowerEvent(towerEventId, userInfo) {
     const towerEvent = await dbContext.TowerEvents.findById(towerEventId)
-    towerEvent.isCanceled = !towerEvent.isCanceled
 
-    await towerEvent.save()
     if (towerEvent.creatorId != userInfo.id) {
       throw new Forbidden(`YOU CANNOT CANCEL ANOTHER USERS EVENT ${userInfo.nickname.toUpperCase()}!`)
     }
+    towerEvent.isCanceled = !towerEvent.isCanceled
+    await towerEvent.save()
     return towerEvent
   }
 
