@@ -8,7 +8,7 @@ export const CommentsSchema = new Schema(
   },
   {
     timestamps: true,
-    ToJSON: { virtuals: true, versionKey: false },
+    toJSON: { virtuals: true, versionKey: false },
   }
 )
 
