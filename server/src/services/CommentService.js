@@ -1,4 +1,5 @@
 import { dbContext } from "../db/DbContext.js"
+import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class CommentService {
 
@@ -14,6 +15,17 @@ class CommentService {
   }
 
 
+  async deleteComment(commentId, userInfo) {
+    const comment = await dbContext.Comments.findById(commentId)
+    if (comment == null) {
+      throw new BadRequest(`Invalid Id: ${commentId}`)
+    }
+    if (comment.creatorId != userInfo.id) {
+      throw new Forbidden(`YOU CANNOT DELETE SOMEONE ELSES COMMENT ${userInfo.nickname.toUpperCase()}!`)
+    }
+    await comment.deleteOne()
+    return 'Deleted Comment!'
+  }
 }
 
 export const commentService = new CommentService()
