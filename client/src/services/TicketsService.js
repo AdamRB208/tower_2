@@ -33,6 +33,9 @@ class TicketsService {
   async deleteTicket(ticketId) {
     const response = await api.delete(`api/tickets/${ticketId}`)
     logger.log('Deleted Ticket!', response.data)
+    const ticketEvent = AppState.ticketEvent
+    const index = ticketEvent.findIndex(ticket => ticket.id == ticketId)
+    ticketEvent.splice(index, 1)
   }
 
 }
