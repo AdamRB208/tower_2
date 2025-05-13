@@ -95,6 +95,17 @@ async function getCommentsByEventId() {
   }
 }
 
+async function deleteComment(commentId) {
+  const confirmed = await Pop.confirm('Are you sure you want to delete this comment?')
+  if (!confirmed) return
+  try {
+    await commentService.deleteComment(commentId)
+  }
+  catch (error) {
+    Pop.error(error, 'Could not delete comment');
+    logger.log('COULD NOT DELETE COMMENT', error)
+  }
+}
 
 </script>
 
@@ -173,16 +184,19 @@ async function getCommentsByEventId() {
         </div>
       </div>
     </div>
-    <div class="row mt-4">
-      <div v-for="commentCreator in commentCreator" :key="commentCreator.eventId"
-        class="col-md-9 comment-bg rounded-3 p-2">
+    <div class="row mt-4 comment-bg rounded-3 d-flex flex-column">
+      <div class="col-md-5 mb-2">
         <CommentForm />
+      </div>
+      <div v-for="commentCreator in commentCreator" :key="commentCreator.eventId"
+        class="col-md-5 p-2 mb-2 ms-2 border border-dark border-2 rounded">
         <div class="d-flex d-inline align-items-center">
           <img :src="commentCreator.creator.picture" alt="" class="creator-img mt-2">
           <span class="ms-2">{{ commentCreator.creator.name }}</span>
         </div>
         <p>{{ commentCreator.body }}</p>
-        <button class="btn btn-sm btn-outline-danger comment-btn" type="button">delete</button>
+        <button @click="deleteComment(commentCreator.id)" class="btn btn-sm btn-outline-danger comment-btn"
+          type="button">delete</button>
       </div>
     </div>
   </section>
