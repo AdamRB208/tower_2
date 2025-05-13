@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import CommentForm from '@/components/CommentForm.vue';
 import { CommentCreator } from '@/models/Comments.js';
 import { commentService } from '@/services/CommentService.js';
 import { ticketService } from '@/services/TicketsService.js';
@@ -173,9 +174,11 @@ async function getCommentsByEventId() {
       </div>
     </div>
     <div class="row mt-4">
-      <div v-for="commentCreator in commentCreator" :key="commentCreator.id" class="col-md-9 comment-bg rounded-3 p-2">
+      <div v-for="commentCreator in commentCreator" :key="commentCreator.eventId"
+        class="col-md-9 comment-bg rounded-3 p-2">
+        <CommentForm />
         <div class="d-flex d-inline align-items-center">
-          <img :src="commentCreator.creator.picture" alt="" class="creator-img">
+          <img :src="commentCreator.creator.picture" alt="" class="creator-img mt-2">
           <span class="ms-2">{{ commentCreator.creator.name }}</span>
         </div>
         <p>{{ commentCreator.body }}</p>
