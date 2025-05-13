@@ -18,7 +18,8 @@ defineProps({
       <p>Hosted By: {{ towerEvent.creator.name }}</p>
       <p>{{ towerEvent.startDate.toLocaleDateString() }} {{ towerEvent.location }}</p>
       <p>{{ towerEvent.capacity - towerEvent.ticketCount }} Seats {{ towerEvent.ticketCount }} Attending</p>
-      <p v-if="towerEvent.isCanceled" class="text-danger">CANCELLED</p>
+      <p v-if="towerEvent.isCanceled" class="text-danger">CANCELED!</p>
+      <p v-if="towerEvent.ticketCount == towerEvent.capacity" class="text-primary">SOLD OUT!</p>
     </div>
   </div>
 </template>
