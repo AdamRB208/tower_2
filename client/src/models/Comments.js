@@ -1,4 +1,3 @@
-import { Account } from "./Account.js"
 
 export class Comments {
   constructor(data) {
@@ -9,10 +8,3 @@ export class Comments {
     this.creator = data.creator
   }
 }
-
-// export class CommentCreator extends Comments {
-//   constructor(data) {
-//     super(data)
-//     this.creator = data.creator
-//   }
-// }
