@@ -77,7 +77,6 @@ async function deleteTicket(ticketId) {
   height: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
-
 }
 
 .col-md-2 {

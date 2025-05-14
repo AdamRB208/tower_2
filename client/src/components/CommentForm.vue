@@ -6,7 +6,7 @@ import { Pop } from '@/utils/Pop.js';
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-const commentCreator = computed(() => AppState.commentCreator)
+const comments = computed(() => AppState.comments)
 
 const route = useRoute()
 
@@ -29,13 +29,13 @@ async function createComment() {
 
 
 <template>
-  <form @submit.prevent="createComment()">
+  <form @submit.prevent="createComment()" class="ps-3 pe-3">
     <div class="mb-3">
       <label for="body" class="form-label">Add a comment</label>
       <textarea v-model="editableCommentData.body" type="text" class="form-control" id="body" name="body" rows="3"
         minLength="1" maxLength="500" required></textarea>
     </div>
-    <button type="submit" class="btn btn-outline-success">Submit</button>
+    <button type="submit" class="btn btn-outline-success mb-2">Submit</button>
   </form>
 </template>
 

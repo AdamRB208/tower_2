@@ -2,7 +2,7 @@ import { logger } from "@/utils/Logger.js"
 import { api } from "./AxiosService.js"
 import { TowerEvent } from "@/models/TowerEvent.js"
 import { AppState } from "@/AppState.js"
-import { CommentCreator } from "@/models/Comments.js"
+import { Comments } from "@/models/Comments.js"
 
 class TowerEventsService {
 
@@ -39,9 +39,9 @@ class TowerEventsService {
   async getCommentsByEventId(towerEventId) {
     const response = await api.get(`api/events/${towerEventId}/comments`)
     logger.log('Got comments by Event Id', response.data)
-    const commentCreator = response.data.map(pojo => new CommentCreator(pojo))
-    AppState.commentCreator = commentCreator
-    logger.log('rendering comments by event Id', commentCreator)
+    const comments = response.data.map(pojo => new Comments(pojo))
+    AppState.comments = comments
+    logger.log('rendering comments by event Id', comments)
   }
 
 }

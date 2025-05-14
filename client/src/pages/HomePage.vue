@@ -55,12 +55,13 @@ async function getTowerEvents() {
 <template>
   <section class="container-fluid">
     <div class="row">
-      <div class="col-12 bg-img">
+      <div class="col-12 bg-img overflow-auto">
         <div class="d-flex flex-column header-card w-50 mt-5 ms-3 rounded-4">
           <h1 class="p-2">Discover events you're interested in</h1>
           <p class="fs-4 mt-3 p-2">Event management for people, by people.</p>
           <div></div>
-          <p class="p-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium nam et illo optio numquam
+          <p class="p-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium nam et
+            illo optio numquam
             odit,
             repellendus quaerat perferendis nulla adipisci necessitatibus dicta ducimus ratione minus suscipit corporis
             eligendi a at?</p>
@@ -70,7 +71,7 @@ async function getTowerEvents() {
     <div class="row justify-content-center text-center">
       <div class="col-md-5 fs-2 mt-3">How Tower Works</div>
     </div>
-    <div class="row justify-content-evenly">
+    <div class="row-fluid justify-content-evenly d-flex d-inline">
       <div class="col-md-5 info-card border border-3 border-dark-subtle shadow m-3 p-2">
         <h3>Discover events your interested in</h3>
         <p>Browse through community hosted events for all the things you love</p>

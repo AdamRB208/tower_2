@@ -6,12 +6,13 @@ export class Comments {
     this.accountId = data.accountId
     this.eventId = data.eventId
     this.body = data.body
+    this.creator = data.creator
   }
 }
 
-export class CommentCreator extends Comments {
-  constructor(data) {
-    super(data)
-    this.creator = new Account(data.creator)
-  }
-}
+// export class CommentCreator extends Comments {
+//   constructor(data) {
+//     super(data)
+//     this.creator = data.creator
+//   }
+// }

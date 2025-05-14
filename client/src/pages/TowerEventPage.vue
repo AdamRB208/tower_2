@@ -1,7 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import CommentForm from '@/components/CommentForm.vue';
-import { CommentCreator } from '@/models/Comments.js';
 import { commentService } from '@/services/CommentService.js';
 import { ticketService } from '@/services/TicketsService.js';
 import { towerEventsService } from '@/services/TowerEventsService.js';
@@ -18,11 +17,8 @@ const account = computed(() => AppState.account)
 
 const ticketProfile = computed(() => AppState.ticketProfile)
 
-const tickets = computed(() => AppState.tickets)
 
-const commentCreator = computed(() => AppState.commentCreator)
-
-const comment = computed(() => AppState.comments)
+const comments = computed(() => AppState.comments)
 
 const route = useRoute()
 
@@ -115,7 +111,7 @@ async function deleteComment(commentId) {
     <div class="row">
       <div class="col-12">
         <div class="text-center fs-1">Hosted By {{ towerEvent.creator.name }}!</div>
-        <img :src="towerEvent.coverImg" alt="picture of event" class="mt-2">
+        <img :src="towerEvent.coverImg" alt="picture of event" class="mt-2 event-img">
         <div class="d-flex gap-5 align-items-center">
           <h1>{{ towerEvent.name }}</h1>
           <span class="border rounded-5 p-2 bg-vue">{{ towerEvent.type }}</span>
@@ -157,7 +153,7 @@ async function deleteComment(commentId) {
           </div>
           <div v-if="towerEvent.isCanceled == false">
             <button @click.prevent="createTicket()"
-              v-if="!ticketProfile.some(ticketProfile => ticketProfile.accountId === account.id && ticketProfile.profile.id === ticketProfile.accountId)"
+              v-if="!ticketProfile.some(ticketProfile => ticketProfile.accountId === account?.id && ticketProfile.profile?.id === ticketProfile.accountId)"
               class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend Event</button>
             <button v-else-if="towerEvent.capacity === towerEvent.ticketCount" class="btn btn-primary btn-sm"
               disabled>Sold Out</button>
@@ -184,18 +180,18 @@ async function deleteComment(commentId) {
         </div>
       </div>
     </div>
-    <div class="row mt-4 comment-bg rounded-3 d-flex flex-column">
-      <div class="col-md-5 mb-2">
+    <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-column">
+      <div class="col-md-5 mb-2 ms-2 border border-dark border-2 rounded comment-bg">
         <CommentForm />
       </div>
-      <div v-for="commentCreator in commentCreator" :key="commentCreator.eventId"
-        class="col-md-5 p-2 mb-2 ms-2 border border-dark border-2 rounded">
+      <div v-for="comments in comments" :key="comments.eventId"
+        class="col-md-5 p-2 mb-2 ms-2 border border-dark border-2 rounded comment-bg">
         <div class="d-flex d-inline align-items-center">
-          <img :src="commentCreator.creator.picture" alt="" class="creator-img mt-2">
-          <span class="ms-2">{{ commentCreator.creator.name }}</span>
+          <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
+          <span class="ms-2">{{ comments.creator.name }}</span>
         </div>
-        <p>{{ commentCreator.body }}</p>
-        <button @click="deleteComment(commentCreator.id)" class="btn btn-sm btn-outline-danger comment-btn"
+        <p>{{ comments.body }}</p>
+        <button @click="deleteComment(comments.id)" class="btn btn-sm btn-outline-danger comment-btn"
           type="button">delete</button>
       </div>
     </div>
@@ -204,6 +200,12 @@ async function deleteComment(commentId) {
 
 
 <style lang="scss" scoped>
+.event-img {
+  // height: 20em;
+  width: 100%;
+  object-fit: cover;
+}
+
 .attendee-img {
   height: 4em;
   aspect-ratio: 1/1;
@@ -224,4 +226,7 @@ async function deleteComment(commentId) {
 .comment-bg {
   background-color: #8c8a8f;
 }
-</style>
+
+// .form-card {
+//   max-width: 600px;
+// }</style>
