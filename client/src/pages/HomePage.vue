@@ -60,7 +60,7 @@ async function getTowerEvents() {
           <h1 class="p-2">Discover events you're interested in</h1>
           <p class="fs-4 mt-3 p-2">Event management for people, by people.</p>
           <div></div>
-          <p class="p-2">Whatever your interest, from hiking and reading to networking and skill shareing, there are
+          <p class="p-2">Whatever your interest, from hiking and reading to networking and skill sharing, there are
             thousands of people who share it on Tower. Events are happening everyday - log in to join the fun.</p>
         </div>
       </div>

@@ -111,7 +111,7 @@ async function deleteComment(commentId) {
     <div class="row">
       <div class="col-12">
         <div class="text-center fs-1">Hosted By {{ towerEvent.creator.name }}!</div>
-        <img :src="towerEvent.coverImg" alt="picture of event" class="mt-2 event-img">
+        <img :src="towerEvent.coverImg" alt="picture of event" class="mt-2 rounded-2 event-img">
         <div class="d-flex gap-5 align-items-center">
           <h1>{{ towerEvent.name }}</h1>
           <span class="border rounded-5 p-2 bg-vue">{{ towerEvent.type }}</span>
