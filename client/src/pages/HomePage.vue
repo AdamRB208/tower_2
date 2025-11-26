@@ -60,11 +60,8 @@ async function getTowerEvents() {
           <h1 class="p-2">Discover events you're interested in</h1>
           <p class="fs-4 mt-3 p-2">Event management for people, by people.</p>
           <div></div>
-          <p class="p-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium nam et
-            illo optio numquam
-            odit,
-            repellendus quaerat perferendis nulla adipisci necessitatibus dicta ducimus ratione minus suscipit corporis
-            eligendi a at?</p>
+          <p class="p-2">Whatever your interest, from hiking and reading to networking and skill shareing, there are
+            thousands of people who share it on Tower. Events are happening everyday - log in to join the fun.</p>
         </div>
       </div>
     </div>
@@ -72,11 +69,11 @@ async function getTowerEvents() {
       <div class="col-md-5 fs-2 mt-3">How Tower Works</div>
     </div>
     <div class="row-fluid justify-content-evenly d-flex d-inline">
-      <div class="col-md-5 info-card border border-3 border-dark-subtle shadow m-3 p-2">
+      <div class="col-md-5 info-card border border-3 border-dark-subtle rounded-2 shadow m-3 p-2">
         <h3>Discover events your interested in</h3>
         <p>Browse through community hosted events for all the things you love</p>
       </div>
-      <div class="col-md-5 info-card border border-3 border-dark-subtle shadow m-3 p-2">
+      <div class="col-md-5 info-card border border-3 border-dark-subtle rounded-2 shadow m-3 p-2">
         <h3>Start an event to invite your friends</h3>
         <p>Create your own Tower event, and draw form a community of millions</p>
         <button v-if="account" class="btn btn-outline-success shadow-lg text-shadow-lg align-items-center" role="button"
@@ -85,17 +82,18 @@ async function getTowerEvents() {
       </div>
     </div>
     <div class="row justify-content-between">
+      <div class="fs-2" style="margin-left: 4rem;">Explore Top Categories</div>
       <div v-for="type in categories" :key="'filter' + type.name" class="col-md-2 d-flex">
         <div @click="filterCategory = type.name"
           class="p-2 m-3 fs-4 rounded-2 shadow category-btn text-center btn btn-outline-vue" role="button">{{
-            type.name }}</div>
+          type.name }}</div>
       </div>
     </div>
     <div class="row">
       <div class="col-12">
         <h2>Upcoming Events</h2>
       </div>
-      <div v-for="towerEvent in towerEvent" :key="towerEvent.id" class="col-md-3">
+      <div v-for="towerEvent in towerEvent" :key="towerEvent.id" class="col-md-3 mb-4">
         <TowerEventsCard :towerEvent="towerEvent" />
       </div>
     </div>

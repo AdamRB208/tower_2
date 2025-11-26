@@ -9,7 +9,7 @@ defineProps({
 
 
 <template>
-  <div class="event-card border border-dark-subtle border-3 shadow mb-4">
+  <div class="event-card border border-dark-subtle rounded-2 border-3 shadow">
     <RouterLink :to="{ name: 'Events', params: { towerEventId: towerEvent.id } }">
       <img :src="towerEvent.coverImg" :alt="'cover image for ' + towerEvent.name" type="button">
     </RouterLink>
@@ -34,6 +34,6 @@ img {
 
 .event-card {
   background-color: #8c8a8f;
-
+  height: 100%;
 }
 </style>
