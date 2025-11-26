@@ -18,7 +18,7 @@ const account = computed(() => AppState.account)
 const ticketProfile = computed(() => AppState.ticketProfile)
 
 
-const comments = computed(() => AppState.comments)
+const comment = computed(() => AppState.comments)
 
 const route = useRoute()
 
@@ -184,7 +184,7 @@ async function deleteComment(commentId) {
       <div class="col-md-5 mb-2 ms-2 border border-dark border-2 rounded comment-bg">
         <CommentForm />
       </div>
-      <div v-for="comments in comments" :key="comments.eventId"
+      <div v-for="comments in comment" :key="comments.eventId"
         class="col-md-5 p-2 mb-2 ms-2 border border-dark border-2 rounded comment-bg">
         <div class="d-flex d-inline align-items-center">
           <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
