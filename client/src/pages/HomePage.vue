@@ -66,14 +66,14 @@ async function getTowerEvents() {
       </div>
     </div>
     <div class="row justify-content-center text-center">
-      <div class="col-md-5 fs-2 mt-3">How Tower Works</div>
+      <div class="col-md-5 fs-2 mt-3 mb-3">How Tower Works</div>
     </div>
     <div class="row-fluid justify-content-evenly d-flex d-inline">
-      <div class="col-md-5 info-card border border-3 border-dark-subtle rounded-2 shadow m-3 p-2">
+      <div class="col-md-5 info-card border border-dark-subtle rounded-2 shadow m-3 p-2">
         <h3>Discover events your interested in</h3>
         <p>Browse through community hosted events for all the things you love</p>
       </div>
-      <div class="col-md-5 info-card border border-3 border-dark-subtle rounded-2 shadow m-3 p-2">
+      <div class="col-md-5 info-card border border-dark-subtle rounded-2 shadow m-3 p-2">
         <h3>Start an event to invite your friends</h3>
         <p>Create your own Tower event, and draw form a community of millions</p>
         <button v-if="account" class="btn btn-outline-success shadow-lg text-shadow-lg align-items-center" role="button"
@@ -82,7 +82,7 @@ async function getTowerEvents() {
       </div>
     </div>
     <div class="row justify-content-between">
-      <div class="fs-2" style="margin-left: 4rem;">Explore Top Categories</div>
+      <div class="fs-2" style="margin-left: 4rem; margin-top: 2rem;">Explore Top Categories</div>
       <div v-for="type in categories" :key="'filter' + type.name" class="col-md-2 d-flex">
         <div @click="filterCategory = type.name"
           class="p-2 m-3 fs-4 rounded-2 shadow category-btn text-center btn btn-outline-vue" role="button">{{
@@ -91,9 +91,9 @@ async function getTowerEvents() {
     </div>
     <div class="row">
       <div class="col-12">
-        <h2>Upcoming Events</h2>
+        <h2 style="margin-left: 4rem; margin-top: 2rem;">Upcoming Events</h2>
       </div>
-      <div v-for="towerEvent in towerEvent" :key="towerEvent.id" class="col-md-3 mb-4">
+      <div v-for="towerEvent in towerEvent" :key="towerEvent.id" class="col-md-4 mb-4">
         <TowerEventsCard :towerEvent="towerEvent" />
       </div>
     </div>
@@ -103,7 +103,7 @@ async function getTowerEvents() {
 
 <style scoped lang="scss">
 .bg-img {
-  background-image: url('https://images.unsplash.com/photo-1556913337-57357cda0264?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fHBlb3BsZSUyMGF0JTIwYSUyMGNvbnZlbnRpb258ZW58MHwwfDB8fHwy');
+  background-image: url('https://images.unsplash.com/photo-1559171667-74fe3499b5ba?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvbnZlbnRpb258ZW58MHx8MHx8fDI%3D');
   height: 500px;
   background-size: cover;
   aspect-ratio: 1/1;
@@ -114,7 +114,9 @@ async function getTowerEvents() {
 }
 
 .header-card {
-  background-color: #8c8a8fc8;
+  background-color: #ededf175;
+  color: white;
+  text-shadow: 2px 2px 4px black;
 }
 
 .category-btn {
@@ -122,7 +124,7 @@ async function getTowerEvents() {
 }
 
 .info-card {
-  background-color: #8c8a8f;
-  border-width: 6px;
+  background-color: #ededf1;
+  border-width: 2px;
 }
 </style>
