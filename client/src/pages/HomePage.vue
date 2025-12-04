@@ -55,8 +55,8 @@ async function getTowerEvents() {
 <template>
   <section class="container-fluid">
     <div class="row">
-      <div class="col-12 bg-img overflow-auto">
-        <div class="d-flex flex-column header-card w-50 mt-5 ms-3 rounded-4">
+      <div class="col-12 bg-img">
+        <div class="d-flex flex-column header-card w-50 rounded-4">
           <h1 class="p-2">Discover events you're interested in</h1>
           <p class="fs-4 mt-3 p-2">Event management for people, by people.</p>
           <div></div>
@@ -65,10 +65,10 @@ async function getTowerEvents() {
         </div>
       </div>
     </div>
-    <div class="row justify-content-center text-center">
-      <div class="col-md-5 fs-2 mt-3 mb-3">How Tower Works</div>
+    <div class="row row-title justify-content-start">
+      <div class="col-md-5 fs-2 title-section">How Tower Works</div>
     </div>
-    <div class="row-fluid justify-content-evenly d-flex d-inline">
+    <div class="row row-title justify-content-evenly d-flex d-inline">
       <div class="col-md-5 info-card border border-dark-subtle rounded-2 shadow m-3 p-2">
         <h3>Discover events your interested in</h3>
         <p>Browse through community hosted events for all the things you love</p>
@@ -81,19 +81,20 @@ async function getTowerEvents() {
           event</button>
       </div>
     </div>
-    <div class="row justify-content-between">
-      <div class="fs-2" style="margin-left: 4rem; margin-top: 2rem;">Explore Top Categories</div>
-      <div v-for="type in categories" :key="'filter' + type.name" class="col-md-2 d-flex">
+    <div class="row row-title justify-content-evenly flex-wrap">
+      <div class="fs-2 title-section">Explore Top Categories</div>
+      <div v-for="type in categories" :key="'filter' + type.name" class="col-auto d-flex mb-3 mt-3"
+        style="overflow: none;">
         <div @click="filterCategory = type.name"
-          class="p-2 m-3 fs-4 rounded-2 shadow category-btn text-center btn btn-outline-vue" role="button">{{
-          type.name }}</div>
+          class="fs-4 rounded-2 shadow category-btn text-center btn btn-outline-vue" role="button">{{
+            type.name }}</div>
       </div>
     </div>
-    <div class="row">
+    <div class="row row-title">
       <div class="col-12">
-        <h2 style="margin-left: 4rem; margin-top: 2rem;">Upcoming Events</h2>
+        <h2 class="title-section">Upcoming Events</h2>
       </div>
-      <div v-for="towerEvent in towerEvent" :key="towerEvent.id" class="col-md-4 mb-4">
+      <div v-for="towerEvent in towerEvent" :key="towerEvent.id" class="col-md-3 mb-4">
         <TowerEventsCard :towerEvent="towerEvent" />
       </div>
     </div>
@@ -104,10 +105,10 @@ async function getTowerEvents() {
 <style scoped lang="scss">
 .bg-img {
   background-image: url('https://images.unsplash.com/photo-1559171667-74fe3499b5ba?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvbnZlbnRpb258ZW58MHx8MHx8fDI%3D');
-  height: 500px;
+  height: 700px;
   background-size: cover;
   aspect-ratio: 1/1;
-  background-position: center;
+  background-position: bottom;
   object-fit: cover;
   width: 100%;
   image-rendering: smooth;
@@ -117,8 +118,18 @@ async function getTowerEvents() {
   background-color: #ededf175;
   color: white;
   text-shadow: 2px 2px 4px black;
+  margin-top: 10rem;
+    margin-left: 2rem;
 }
 
+.row-title {
+  margin-left: 8rem;
+  margin-right: 8rem;
+}
+
+.title-section {
+  margin-top: 5rem;
+}
 .category-btn {
   width: 9rem;
 }
