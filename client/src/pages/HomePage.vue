@@ -87,14 +87,14 @@ async function getTowerEvents() {
         style="overflow: none;">
         <div @click="filterCategory = type.name"
           class="fs-4 rounded-2 shadow category-btn text-center btn btn-outline-vue" role="button">{{
-            type.name }}</div>
+          type.name }}</div>
       </div>
     </div>
     <div class="row row-title">
       <div class="col-12">
         <h2 class="title-section">Upcoming Events</h2>
       </div>
-      <div v-for="towerEvent in towerEvent" :key="towerEvent.id" class="col-md-3 mb-4">
+      <div v-for="towerEvent in towerEvent" :key="towerEvent.id" class="col-md-4 mb-4">
         <TowerEventsCard :towerEvent="towerEvent" />
       </div>
     </div>
