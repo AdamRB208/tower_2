@@ -9,14 +9,14 @@ defineProps({
 
 
 <template>
-  <div class="event-card border border-dark-subtle rounded-2 border-3 shadow">
+  <div class="event-card border border-2 border-dark-subtle shadow">
     <RouterLink :to="{ name: 'Events', params: { towerEventId: towerEvent.id } }">
       <div class="image-container" :style="{ backgroundImage: `url(${towerEvent.coverImg})` }">
         <p v-if="towerEvent.isCanceled" class="notification-text canceled-bg">CANCELED!</p>
         <p v-if="towerEvent.ticketCount == towerEvent.capacity" class="notification-text sold-out-bg">SOLD OUT!</p>
       </div>
     </RouterLink>
-    <div class="p-1">
+    <div class="p-1 details-sec">
       <h5>{{ towerEvent.name }}</h5>
       <p>Hosted By: {{ towerEvent.creator.name }}</p>
       <p>{{ towerEvent.startDate.toLocaleDateString() }} {{ towerEvent.location }}</p>
@@ -31,10 +31,12 @@ defineProps({
   width: 100%;
   aspect-ratio: 1/1;
   background-size: cover;
-    background-position: center;
+  background-position: center;
     position: relative;
+    border-radius: 5px 5px 0px 0px;
   }
   
+                                                                ;
   .notification-text {
     position: absolute;
     top: 50%;
@@ -58,10 +60,12 @@ defineProps({
   }
   
   .event-card {
-    background-color: #8c8a8f;
+    background-color: #ededf1;
     height: 100%;
-  }
-                                a {
-                                  text-decoration: none;
-                                }
+  border-radius: 6px;
+}
+
+a {
+  text-decoration: none;
+}
 </style>
