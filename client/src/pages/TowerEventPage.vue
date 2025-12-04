@@ -172,26 +172,25 @@ async function deleteComment(commentId) {
         </div>
         <div>
           <div>These people are attending:
-            <div v-for="ticketProfile in ticketProfile" :key="ticketProfile.id" class="d-flex align-items-center m-2">
+            <div v-for="ticketProfile in ticketProfile" :key="ticketProfile.id" class="d-flex align-items-center mt-2">
               <img :src="ticketProfile.profile.picture" alt="profile picture" class="attendee-img">
-              <p class="ps-2">{{ ticketProfile.profile.name }}</p>
+              <p class="ps-2 profile-name">{{ ticketProfile.profile.name }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-column">
-      <div class="col-md-5 mb-2 ms-2 border border-dark border-2 rounded comment-bg">
+    <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-column comment-section-bg">
+      <div class="col-md-5 p-2 rounded shadow comment-section">
         <CommentForm />
       </div>
-      <div v-for="comments in comment" :key="comments.eventId"
-        class="col-md-5 p-2 mb-2 ms-2 border border-dark border-2 rounded comment-bg">
+      <div v-for="comments in comment" :key="comments.eventId" class="col-md-5 p-2 rounded shadow comment-section">
         <div class="d-flex d-inline align-items-center">
           <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
           <span class="ms-2">{{ comments.creator.name }}</span>
         </div>
-        <p>{{ comments.body }}</p>
-        <button @click="deleteComment(comments.id)" class="btn btn-sm btn-outline-danger comment-btn"
+        <p class="comment-body">{{ comments.body }}</p>
+        <button @click="deleteComment(comments.id)" class="btn btn-sm btn-outline-danger comment-btn m-2"
           type="button">delete</button>
       </div>
     </div>
@@ -201,19 +200,20 @@ async function deleteComment(commentId) {
 
 <style lang="scss" scoped>
 .event-img {
-  // height: 20em;
+  height: 20em;
   width: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .attendee-img {
-  height: 4em;
+  height: 2em;
   aspect-ratio: 1/1;
   border-radius: 50%;
 }
 
 .creator-img {
-  height: 4em;
+  height: 2em;
   aspect-ratio: 1/1;
   border-radius: 50%;
 }
@@ -223,10 +223,20 @@ async function deleteComment(commentId) {
   justify-content: flex-end;
 }
 
-.comment-bg {
-  background-color: #8c8a8f;
+.comment-section-bg {
+  background-color: #cac8cc;
 }
 
-// .form-card {
-//   max-width: 600px;
-// }</style>
+.comment-section {
+  background-color: white;
+  margin: 1rem;
+}
+
+.comment-body {
+  margin: 2rem;
+}
+
+.profile-name {
+  margin-bottom: 0;
+}
+</style>
