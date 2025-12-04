@@ -11,29 +11,57 @@ defineProps({
 <template>
   <div class="event-card border border-dark-subtle rounded-2 border-3 shadow">
     <RouterLink :to="{ name: 'Events', params: { towerEventId: towerEvent.id } }">
-      <img :src="towerEvent.coverImg" :alt="'cover image for ' + towerEvent.name" type="button">
+      <div class="image-container" :style="{ backgroundImage: `url(${towerEvent.coverImg})` }">
+        <p v-if="towerEvent.isCanceled" class="notification-text canceled-bg">CANCELED!</p>
+        <p v-if="towerEvent.ticketCount == towerEvent.capacity" class="notification-text sold-out-bg">SOLD OUT!</p>
+      </div>
     </RouterLink>
     <div class="p-1">
       <h5>{{ towerEvent.name }}</h5>
       <p>Hosted By: {{ towerEvent.creator.name }}</p>
       <p>{{ towerEvent.startDate.toLocaleDateString() }} {{ towerEvent.location }}</p>
       <p>{{ towerEvent.capacity - towerEvent.ticketCount }} Seats {{ towerEvent.ticketCount }} Attending</p>
-      <p v-if="towerEvent.isCanceled" class="text-danger">CANCELED!</p>
-      <p v-if="towerEvent.ticketCount == towerEvent.capacity" class="text-primary">SOLD OUT!</p>
     </div>
   </div>
 </template>
 
 
 <style lang="scss" scoped>
-img {
+.image-container {
   width: 100%;
   aspect-ratio: 1/1;
-  object-fit: cover;
-}
-
-.event-card {
-  background-color: #8c8a8f;
-  height: 100%;
-}
+  background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .notification-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 2px 2px 5px black;
+    padding: .5rem;
+    border-radius: 8px;
+  }
+  
+  .canceled-bg {
+    background-color: red;
+  }
+  
+  .sold-out-bg {
+    background-color: blue;
+  }
+  
+  .event-card {
+    background-color: #8c8a8f;
+    height: 100%;
+  }
+                                a {
+                                  text-decoration: none;
+                                }
 </style>
