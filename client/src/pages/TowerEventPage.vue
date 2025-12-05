@@ -225,11 +225,14 @@ async function deleteComment(commentId) {
 
 .comment-section-bg {
   background-color: #cac8cc;
+  max-width: 60%;
 }
 
 .comment-section {
   background-color: white;
   margin: 1rem;
+  width: 94%;
+    min-width: inherit;
 }
 
 .comment-body {
