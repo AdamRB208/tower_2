@@ -29,6 +29,7 @@ defineProps({
 <style lang="scss" scoped>
 .image-container {
   width: 100%;
+  height: 200px;
   aspect-ratio: 1/1;
   background-size: cover;
   background-position: center;
@@ -36,7 +37,6 @@ defineProps({
     border-radius: 5px 5px 0px 0px;
   }
   
-                                                                ;
   .notification-text {
     position: absolute;
     top: 50%;

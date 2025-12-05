@@ -103,6 +103,7 @@ async function getTowerEvents() {
 </template>
 
 <style scoped lang="scss">
+
 .bg-img {
   background-image: url('https://images.unsplash.com/photo-1559171667-74fe3499b5ba?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvbnZlbnRpb258ZW58MHx8MHx8fDI%3D');
   height: 700px;
