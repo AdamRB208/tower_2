@@ -124,25 +124,25 @@ async function deleteComment(commentId) {
             <span class="mdi mdi-alert text-danger"></span>
           </p>
         </div>
-        <div>
-          <p class="fs-4 mt-5">Date and Time</p>
-          <p class="mdi mdi-clipboard-text-clock-outline"> {{ towerEvent.startDate.toDateString() }} @ {{
-            towerEvent.startDate.toLocaleTimeString() }}</p>
-        </div>
-        <div>
-          <p class="fs-4">Location</p>
-          <p class="mdi mdi-map-marker-outline">{{ towerEvent.location }}</p>
-        </div>
-        <div class="mb-4">
-          <button @click="cancelTowerEvent()" v-if="towerEvent.creatorId == account?.id"
-            class="btn btn-danger rounded-pill text-light">
-            {{ towerEvent.isCanceled ? 'Un-cancel' : 'Cancel Event' }} <span class="mdi"
-              :class="towerEvent.isCanceled ? 'mdi-publish' : 'mdi-close-circle'"> </span>
-          </button>
-        </div>
       </div>
     </div>
     <div class="row">
+      <div class="col-md-3">
+        <p class="fs-4 mt-5">Date and Time</p>
+        <p class="mdi mdi-clipboard-text-clock-outline"> {{ towerEvent.startDate.toDateString() }} @ {{
+          towerEvent.startDate.toLocaleTimeString() }}</p>
+      </div>
+      <div>
+        <p class="fs-4">Location</p>
+        <p class="mdi mdi-map-marker-outline">{{ towerEvent.location }}</p>
+      </div>
+      <div class="mb-4">
+        <button @click="cancelTowerEvent()" v-if="towerEvent.creatorId == account?.id"
+          class="btn btn-danger rounded-pill text-light">
+          {{ towerEvent.isCanceled ? 'Un-cancel' : 'Cancel Event' }} <span class="mdi"
+            :class="towerEvent.isCanceled ? 'mdi-publish' : 'mdi-close-circle'"> </span>
+        </button>
+      </div>
       <div class="col-md-3">
         <div class="mb-2">
           <div>Event Capacity: {{ towerEvent.capacity }}</div>
@@ -164,7 +164,7 @@ async function deleteComment(commentId) {
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between">
       <div class="col-md-3">
         <div v-if="towerEvent.ticketCount"
           :title="towerEvent.ticketCount + (towerEvent.ticketCount == 1 ? ' person is ' : ' people are ') + 'attending this event'">
@@ -179,9 +179,7 @@ async function deleteComment(commentId) {
           </div>
         </div>
       </div>
-    </div>
-    <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-column comment-section-bg">
-      <div class="col-12 col-md-8 col-lg-6 p-2 rounded shadow comment-section">
+      <div class="col-9 col-md-8 col-lg-6 p-2 rounded shadow comment-section">
         <CommentForm />
       </div>
       <div v-for="comments in comment" :key="comments.eventId" class="col-md-5 p-2 rounded shadow comment-section">
@@ -223,10 +221,10 @@ async function deleteComment(commentId) {
   justify-content: flex-end;
 }
 
-.comment-section-bg {
-  background-color: #cac8cc;
-  max-width: 60%;
-}
+// .comment-section-bg {
+//   background-color: #cac8cc;
+//   max-width: 60%;
+// }
 
 .comment-section {
   background-color: white;
