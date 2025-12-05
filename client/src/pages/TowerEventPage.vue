@@ -181,7 +181,7 @@ async function deleteComment(commentId) {
       </div>
     </div>
     <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-column comment-section-bg">
-      <div class="col-md-5 p-2 rounded shadow comment-section">
+      <div class="col-12 col-md-8 col-lg-6 p-2 rounded shadow comment-section">
         <CommentForm />
       </div>
       <div v-for="comments in comment" :key="comments.eventId" class="col-md-5 p-2 rounded shadow comment-section">
@@ -231,8 +231,8 @@ async function deleteComment(commentId) {
 .comment-section {
   background-color: white;
   margin: 1rem;
-  width: 94%;
-    min-width: inherit;
+  width: inherit;
+    overflow-x: inherit;
 }
 
 .comment-body {
