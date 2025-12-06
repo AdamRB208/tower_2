@@ -112,7 +112,7 @@ async function deleteComment(commentId) {
   <section v-if="towerEvent" class="container">
     <div class="row">
       <div class="col-12">
-        <div class="text-center fs-1">Hosted By {{ towerEvent.creator.name }}!</div>
+        <div class="text-center p-3 fs-1">Hosted By {{ towerEvent.creator.name }}!</div>
         <img :src="towerEvent.coverImg" alt="picture of event" class="mt-2 rounded-2 event-img">
         <div class="d-flex gap-5 align-items-center mt-4">
           <h1>{{ towerEvent.name }}</h1>
@@ -135,12 +135,16 @@ async function deleteComment(commentId) {
       <div class="col-md-3">
         <div class="time-container">
           <p class="fs-4">Date and Time</p>
-          <p class="mdi mdi-clipboard-text-clock-outline text-center"> {{ towerEvent.startDate.toDateString() }} @ {{
+          <p class="text-center"><i class="mdi mdi-clipboard-text-clock-outline fs-4 text-success"></i> {{
+            towerEvent.startDate.toDateString() }}
+            @
+            {{
             towerEvent.startDate.toLocaleTimeString() }}</p>
         </div>
         <div class="location-container">
           <p class="fs-4">Location</p>
-          <p class="mdi mdi-map-marker-outline text-center">{{ towerEvent.location }}</p>
+          <p class="text-center"><i class="mdi mdi-map-marker-outline fs-4 text-success"></i>{{ towerEvent.location }}
+          </p>
         </div>
         <div class="mb-4">
           <button @click="cancelTowerEvent()" v-if="towerEvent.creatorId == account?.id"
