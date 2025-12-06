@@ -9,7 +9,7 @@ defineProps({
 
 
 <template>
-  <div class="event-card border border-2 border-dark-subtle shadow">
+  <div class="event-card border border-2 border-dark-subtle shadow-lg">
     <RouterLink :to="{ name: 'Events', params: { towerEventId: towerEvent.id } }">
       <div class="image-container" :style="{ backgroundImage: `url(${towerEvent.coverImg})` }">
         <p v-if="towerEvent.isCanceled" class="notification-text canceled-bg">CANCELED!</p>

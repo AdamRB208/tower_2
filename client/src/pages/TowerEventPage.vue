@@ -15,7 +15,7 @@ const towerEvent = computed(() => AppState.activeTowerEvent)
 
 const account = computed(() => AppState.account)
 
-const ticketProfile = computed(() => AppState.ticketProfile)
+const ticketProfiles = computed(() => AppState.ticketProfile)
 
 
 const comment = computed(() => AppState.comments)
@@ -114,12 +114,12 @@ async function deleteComment(commentId) {
       <div class="col-12">
         <div class="text-center fs-1">Hosted By {{ towerEvent.creator.name }}!</div>
         <img :src="towerEvent.coverImg" alt="picture of event" class="mt-2 rounded-2 event-img">
-        <div class="d-flex gap-5 align-items-center">
+        <div class="d-flex gap-5 align-items-center mt-4">
           <h1>{{ towerEvent.name }}</h1>
           <span class="border rounded-5 p-2 bg-vue">{{ towerEvent.type }}</span>
         </div>
         <div>
-          <p class="mt-4">{{ towerEvent.description }}</p>
+          <p class="mt-4 mb-5">{{ towerEvent.description }}</p>
           <p v-if="towerEvent.isCanceled" class="text-center">
             <span class="mdi mdi-alert text-danger"></span>
             This event has been canceled!
@@ -131,22 +131,24 @@ async function deleteComment(commentId) {
 
     <!-- Event Details Section Begins Here -->
 
-    <div class="row">
+    <div class="row mb-5">
       <div class="col-md-3">
-        <p class="fs-4 mt-5">Date and Time</p>
-        <p class="mdi mdi-clipboard-text-clock-outline"> {{ towerEvent.startDate.toDateString() }} @ {{
-          towerEvent.startDate.toLocaleTimeString() }}</p>
-      </div>
-      <div>
-        <p class="fs-4">Location</p>
-        <p class="mdi mdi-map-marker-outline">{{ towerEvent.location }}</p>
-      </div>
-      <div class="mb-4">
-        <button @click="cancelTowerEvent()" v-if="towerEvent.creatorId == account?.id"
-          class="btn btn-danger rounded-pill text-light">
-          {{ towerEvent.isCanceled ? 'Un-cancel' : 'Cancel Event' }} <span class="mdi"
-            :class="towerEvent.isCanceled ? 'mdi-publish' : 'mdi-close-circle'"> </span>
-        </button>
+        <div class="time-container">
+          <p class="fs-4">Date and Time</p>
+          <p class="mdi mdi-clipboard-text-clock-outline text-center"> {{ towerEvent.startDate.toDateString() }} @ {{
+            towerEvent.startDate.toLocaleTimeString() }}</p>
+        </div>
+        <div class="location-container">
+          <p class="fs-4">Location</p>
+          <p class="mdi mdi-map-marker-outline text-center">{{ towerEvent.location }}</p>
+        </div>
+        <div class="mb-4">
+          <button @click="cancelTowerEvent()" v-if="towerEvent.creatorId == account?.id"
+            class="btn btn-danger rounded-pill text-light">
+            {{ towerEvent.isCanceled ? 'Un-cancel' : 'Cancel Event' }} <span class="mdi"
+              :class="towerEvent.isCanceled ? 'mdi-publish' : 'mdi-close-circle'"> </span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -164,7 +166,7 @@ async function deleteComment(commentId) {
             </div>
             <div v-if="towerEvent.isCanceled == false">
               <button @click.prevent="createTicket()"
-                v-if="!ticketProfile.some(ticketProfile => ticketProfile.accountId === account?.id && ticketProfile.profile?.id === ticketProfile.accountId)"
+                v-if="!ticketProfiles.some(ticketProfile => ticketProfile.accountId === account?.id && ticketProfile.profile?.id === ticketProfile.accountId)"
                 class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend Event</button>
               <button v-else-if="towerEvent.capacity === towerEvent.ticketCount" class="btn btn-primary btn-sm"
                 disabled>Sold Out</button>
@@ -179,7 +181,7 @@ async function deleteComment(commentId) {
           </div>
           <div>
             <div>These people are attending:
-              <div v-for="ticketProfile in ticketProfile" :key="ticketProfile.id"
+              <div v-for="ticketProfile in ticketProfiles" :key="ticketProfile.id"
                 class="d-flex align-items-center mt-2">
                 <img :src="ticketProfile.profile.picture" alt="profile picture" class="attendee-img">
                 <p class="ps-2 profile-name">{{ ticketProfile.profile.name }}</p>
@@ -237,13 +239,15 @@ async function deleteComment(commentId) {
 
 .comment-section {
   background-color: #80808154;
-    margin: 1rem;
+  margin-left: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
   }
   
   .comment-body {
     margin: 2rem;
     background-color: white;
-      padding: 1rem;
+    padding: 1rem;
   }
   
   .profile-name {
@@ -261,4 +265,17 @@ async function deleteComment(commentId) {
   .lower-section {
     flex-wrap: wrap;
   }
+.time-container {
+  background-color: #80808154;
+  padding: 1rem;
+  border-radius: 5%;
+  margin-bottom: 1rem;
+}
+
+.location-container {
+  background-color: #80808154;
+  padding: 1rem;
+  border-radius: 5%;
+  margin-bottom: 1rem;
+}
 </style>;
