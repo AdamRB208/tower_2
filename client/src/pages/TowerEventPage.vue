@@ -107,6 +107,8 @@ async function deleteComment(commentId) {
 
 
 <template>
+  <!-- Event Section Begins Here  -->
+
   <section v-if="towerEvent" class="container">
     <div class="row">
       <div class="col-12">
@@ -126,6 +128,9 @@ async function deleteComment(commentId) {
         </div>
       </div>
     </div>
+
+    <!-- Event Details Section Begins Here -->
+
     <div class="row">
       <div class="col-md-3">
         <p class="fs-4 mt-5">Date and Time</p>
@@ -144,13 +149,16 @@ async function deleteComment(commentId) {
         </button>
       </div>
     </div>
-    <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between">
-      <div class="col-md-3">
-        <div class="capacity-bg rounded p-3">
+
+    <!-- Capacity and Attendee Section Begins Here -->
+
+    <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between lower-section">
+      <div class="col-12 col-md-3">
+        <div class="capacity-container rounded p-3">
           <div class="mb-2">
             <div>Event Capacity: {{ towerEvent.capacity }}</div>
           </div>
-          <div class="d-flex mb-3 align-items-center">
+          <div class="d-flex align-items-center">
             <div>
               <div>Tickets left: {{ towerEvent.capacity - towerEvent.ticketCount }}</div>
             </div>
@@ -164,24 +172,28 @@ async function deleteComment(commentId) {
             </div>
           </div>
         </div>
-        <div>
-        </div>
-        <div v-if="towerEvent.ticketCount"
-          :title="towerEvent.ticketCount + (towerEvent.ticketCount == 1 ? ' person is ' : ' people are ') + 'attending this event'">
-          <div class="mb-2">Number of attendees: {{ towerEvent.ticketCount }}</div>
-        </div>
-        <div>
-          <div>These people are attending:
-            <div v-for="ticketProfile in ticketProfile" :key="ticketProfile.id" class="d-flex align-items-center mt-2">
-              <img :src="ticketProfile.profile.picture" alt="profile picture" class="attendee-img">
-              <p class="ps-2 profile-name">{{ ticketProfile.profile.name }}</p>
+        <div class="attendee-container mt-3 p-3 rounded shadow">
+          <div v-if="towerEvent.ticketCount"
+            :title="towerEvent.ticketCount + (towerEvent.ticketCount == 1 ? ' person is ' : ' people are ') + 'attending this event'">
+            <div class="mb-2">Number of attendees: {{ towerEvent.ticketCount }}</div>
+          </div>
+          <div>
+            <div>These people are attending:
+              <div v-for="ticketProfile in ticketProfile" :key="ticketProfile.id"
+                class="d-flex align-items-center mt-2">
+                <img :src="ticketProfile.profile.picture" alt="profile picture" class="attendee-img">
+                <p class="ps-2 profile-name">{{ ticketProfile.profile.name }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-6 p-2 rounded shadow comment-section">
+
+      <!-- Comments Section Begins Here -->
+
+      <div class="col-12 col-md-6 p-2 rounded shadow comment-section">
         <CommentForm />
-        <div v-for="comments in comment" :key="comments.eventId" class="col-md-5 p-2 rounded shadow comment-section">
+        <div v-for="comments in comment" :key="comments.eventId" class="p-2 rounded shadow comment-section">
           <div class="d-flex d-inline align-items-center">
             <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
             <span class="ms-2">{{ comments.creator.name }}</span>
@@ -223,19 +235,28 @@ async function deleteComment(commentId) {
 
 
 .comment-section {
-  background-color: white;
-  margin: 1rem;
-  overflow-x: inherit;
-}
-
-.comment-body {
-  margin: 2rem;
-}
-
-.profile-name {
-  margin-bottom: 0;
-}
-.capacity-bg {
-  background-color: gray;
-}
-</style>
+  background-color: #80808154;
+    margin: 1rem;
+  }
+  
+  .comment-body {
+    margin: 2rem;
+  }
+  
+  .profile-name {
+    margin-bottom: 0;
+  }
+  
+  .capacity-container {
+    background-color: #80808154;
+  }
+  
+  .attendee-container {
+    background-color: #80808154;
+  }
+  
+  .lower-section {
+    overflow-x: hidden;
+    width: 100%;
+  }
+</style>;
