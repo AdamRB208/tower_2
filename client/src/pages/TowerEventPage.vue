@@ -256,7 +256,6 @@ async function deleteComment(commentId) {
   }
   
   .lower-section {
-    overflow-x: hidden;
-    width: 100%;
+    flex-wrap: wrap;
   }
 </style>;
