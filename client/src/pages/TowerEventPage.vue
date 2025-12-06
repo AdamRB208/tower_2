@@ -195,10 +195,10 @@ async function deleteComment(commentId) {
 
       <!-- Comments Section Begins Here -->
 
-      <div class="col-12 col-md-6 p-2 rounded shadow comment-section">
+      <div class="col-12 col-md-6 p-2 rounded shadow comment-container">
         <CommentForm />
         <div v-for="comments in comment" :key="comments.eventId"
-          class="p-2 rounded shadow border border-1 border-dark comment-section">
+          class="p-2 rounded shadow border border-1 border-dark comment-box">
           <div class="d-flex d-inline align-items-center">
             <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
             <span class="ms-2">{{ comments.creator.name }}</span>
@@ -238,11 +238,16 @@ async function deleteComment(commentId) {
   justify-content: flex-end;
 }
 
-
-.comment-section {
+.comment-container {
   background-color: #80808154;
   margin-left: 1rem;
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.comment-box {
+  background-color: #80808154;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
     margin-right: 1rem;
   }
   
@@ -263,7 +268,7 @@ async function deleteComment(commentId) {
   .attendee-container {
     background-color: #80808154;
     flex-wrap: wrap;
-      margin-bottom: 2rem;
+    margin-bottom: 2rem;
   }
   
   .lower-section {
