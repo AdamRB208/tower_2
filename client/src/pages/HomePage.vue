@@ -65,15 +65,15 @@ async function getTowerEvents() {
         </div>
       </div>
     </div>
-    <div class="row row-title justify-content-start">
+    <div class="row justify-content-start ms-5">
       <div class="col-md-5 fs-2 title-section">How Tower Works</div>
     </div>
-    <div class="row row-title justify-content-evenly d-flex d-inline">
-      <div class="col-md-5 info-card border border-dark-subtle rounded-2 shadow m-3 p-2">
+    <div class="row d-flex info-container">
+      <div class="col-md-4 info-card border border-dark-subtle rounded-2 shadow m-3 p-2">
         <h3>Discover events your interested in</h3>
         <p>Browse through community hosted events for all the things you love</p>
       </div>
-      <div class="col-md-5 info-card border border-dark-subtle rounded-2 shadow m-3 p-2">
+      <div class="col-md-4 info-card border border-dark-subtle rounded-2 shadow m-3 p-2">
         <h3>Start an event to invite your friends</h3>
         <p>Create your own Tower event, and draw form a community of millions</p>
         <button v-if="account" class="btn btn-outline-success shadow-lg text-shadow-lg align-items-center" role="button"
@@ -111,7 +111,7 @@ async function getTowerEvents() {
   aspect-ratio: 1/1;
   background-position: bottom;
   object-fit: cover;
-  width: 100%;
+  width: fit-content;
   image-rendering: smooth;
 }
 
@@ -123,10 +123,10 @@ async function getTowerEvents() {
     margin-left: 2rem;
 }
 
-.row-title {
-  margin-left: 8rem;
-  margin-right: 8rem;
-}
+// .row-title {
+//   margin-left: 8rem;
+//   margin-right: 8rem;
+// }
 
 .title-section {
   margin-top: 5rem;
@@ -135,11 +135,11 @@ async function getTowerEvents() {
   width: 9rem;
 }
 
+.info-container {
+  flex-wrap: nowrap;
+}
 .info-card {
   background-color: #ededf1;
   border-width: 2px;
 }
-// .tower-event-card {
-//   height: 400px;
-// }
 </style>
