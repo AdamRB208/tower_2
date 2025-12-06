@@ -164,18 +164,16 @@ async function deleteComment(commentId) {
           <div class="mb-2">
             <div>Event Capacity: {{ towerEvent.capacity }}</div>
           </div>
-          <div class="d-flex align-items-center">
-            <div>
-              <div>Tickets left: {{ towerEvent.capacity - towerEvent.ticketCount }}</div>
-            </div>
-            <div v-if="towerEvent.isCanceled == false" class="ms-3">
-              <button @click.prevent="createTicket()"
-                v-if="!ticketProfiles.some(ticketProfile => ticketProfile.accountId === account?.id && ticketProfile.profile?.id === ticketProfile.accountId)"
-                class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend Event</button>
-              <button v-else-if="towerEvent.capacity === towerEvent.ticketCount" class="btn btn-primary btn-sm"
-                disabled>Sold Out</button>
-              <button v-else class="btn btn-success btn-sm" type="button" disabled>Attending!</button>
-            </div>
+          <div>
+            <div>Tickets left: {{ towerEvent.capacity - towerEvent.ticketCount }}</div>
+          </div>
+          <div v-if="towerEvent.isCanceled == false" class="mt-2 text-center">
+            <button @click.prevent="createTicket()"
+              v-if="!ticketProfiles.some(ticketProfile => ticketProfile.accountId === account?.id && ticketProfile.profile?.id === ticketProfile.accountId)"
+              class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend Event</button>
+            <button v-else-if="towerEvent.capacity === towerEvent.ticketCount" class="btn btn-primary btn-sm"
+              disabled>Sold Out</button>
+            <button v-else class="btn btn-success btn-sm" type="button" disabled>Attending!</button>
           </div>
         </div>
         <div class="attendee-container mt-3 p-3 rounded shadow">

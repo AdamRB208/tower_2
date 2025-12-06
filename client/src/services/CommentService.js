@@ -10,6 +10,7 @@ class CommentService {
     logger.log('Created Comment', response.data)
     const comment = new Comments(response.data)
     AppState.comments.push(comment)
+    return comment
   }
 
   async deleteComment(commentId) {
