@@ -193,12 +193,13 @@ async function deleteComment(commentId) {
 
       <div class="col-12 col-md-6 p-2 rounded shadow comment-section">
         <CommentForm />
-        <div v-for="comments in comment" :key="comments.eventId" class="p-2 rounded shadow comment-section">
+        <div v-for="comments in comment" :key="comments.eventId"
+          class="p-2 rounded shadow border border-1 border-dark comment-section">
           <div class="d-flex d-inline align-items-center">
             <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
             <span class="ms-2">{{ comments.creator.name }}</span>
           </div>
-          <p class="comment-body">{{ comments.body }}</p>
+          <p class="comment-body rounded">{{ comments.body }}</p>
           <button @click="deleteComment(comments.id)" class="btn btn-sm btn-outline-danger comment-btn m-2"
             type="button">delete</button>
         </div>
@@ -241,6 +242,8 @@ async function deleteComment(commentId) {
   
   .comment-body {
     margin: 2rem;
+    background-color: white;
+      padding: 1rem;
   }
   
   .profile-name {

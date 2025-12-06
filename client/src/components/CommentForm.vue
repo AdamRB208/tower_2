@@ -35,7 +35,7 @@ async function createComment() {
       <textarea v-model="editableCommentData.body" type="text" class="form-control" id="body" name="body" rows="3"
         minLength="1" maxLength="500" required></textarea>
     </div>
-    <button type="submit" class="btn btn-outline-success mb-2">Submit</button>
+    <button type="submit" class="btn btn-success mb-2">Submit</button>
   </form>
 </template>
 
