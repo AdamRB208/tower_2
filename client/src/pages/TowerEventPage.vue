@@ -143,29 +143,29 @@ async function deleteComment(commentId) {
             :class="towerEvent.isCanceled ? 'mdi-publish' : 'mdi-close-circle'"> </span>
         </button>
       </div>
+    </div>
+    <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between">
       <div class="col-md-3">
-        <div class="mb-2">
-          <div>Event Capacity: {{ towerEvent.capacity }}</div>
-        </div>
-        <div class="d-flex mb-3 align-items-center">
-          <div class="me-2">
-            <div>Tickets left: {{ towerEvent.capacity - towerEvent.ticketCount }}</div>
+        <div class="capacity-bg rounded p-3">
+          <div class="mb-2">
+            <div>Event Capacity: {{ towerEvent.capacity }}</div>
           </div>
-          <div v-if="towerEvent.isCanceled == false">
-            <button @click.prevent="createTicket()"
-              v-if="!ticketProfile.some(ticketProfile => ticketProfile.accountId === account?.id && ticketProfile.profile?.id === ticketProfile.accountId)"
-              class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend Event</button>
-            <button v-else-if="towerEvent.capacity === towerEvent.ticketCount" class="btn btn-primary btn-sm"
-              disabled>Sold Out</button>
-            <button v-else class="btn btn-success btn-sm" type="button" disabled>Attending!</button>
+          <div class="d-flex mb-3 align-items-center">
+            <div>
+              <div>Tickets left: {{ towerEvent.capacity - towerEvent.ticketCount }}</div>
+            </div>
+            <div v-if="towerEvent.isCanceled == false">
+              <button @click.prevent="createTicket()"
+                v-if="!ticketProfile.some(ticketProfile => ticketProfile.accountId === account?.id && ticketProfile.profile?.id === ticketProfile.accountId)"
+                class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend Event</button>
+              <button v-else-if="towerEvent.capacity === towerEvent.ticketCount" class="btn btn-primary btn-sm"
+                disabled>Sold Out</button>
+              <button v-else class="btn btn-success btn-sm" type="button" disabled>Attending!</button>
+            </div>
           </div>
         </div>
         <div>
         </div>
-      </div>
-    </div>
-    <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between">
-      <div class="col-md-3">
         <div v-if="towerEvent.ticketCount"
           :title="towerEvent.ticketCount + (towerEvent.ticketCount == 1 ? ' person is ' : ' people are ') + 'attending this event'">
           <div class="mb-2">Number of attendees: {{ towerEvent.ticketCount }}</div>
@@ -179,17 +179,17 @@ async function deleteComment(commentId) {
           </div>
         </div>
       </div>
-      <div class="col-9 col-md-8 col-lg-6 p-2 rounded shadow comment-section">
+      <div class="col-6 p-2 rounded shadow comment-section">
         <CommentForm />
-      </div>
-      <div v-for="comments in comment" :key="comments.eventId" class="col-md-5 p-2 rounded shadow comment-section">
-        <div class="d-flex d-inline align-items-center">
-          <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
-          <span class="ms-2">{{ comments.creator.name }}</span>
+        <div v-for="comments in comment" :key="comments.eventId" class="col-md-5 p-2 rounded shadow comment-section">
+          <div class="d-flex d-inline align-items-center">
+            <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
+            <span class="ms-2">{{ comments.creator.name }}</span>
+          </div>
+          <p class="comment-body">{{ comments.body }}</p>
+          <button @click="deleteComment(comments.id)" class="btn btn-sm btn-outline-danger comment-btn m-2"
+            type="button">delete</button>
         </div>
-        <p class="comment-body">{{ comments.body }}</p>
-        <button @click="deleteComment(comments.id)" class="btn btn-sm btn-outline-danger comment-btn m-2"
-          type="button">delete</button>
       </div>
     </div>
   </section>
@@ -221,16 +221,11 @@ async function deleteComment(commentId) {
   justify-content: flex-end;
 }
 
-// .comment-section-bg {
-//   background-color: #cac8cc;
-//   max-width: 60%;
-// }
 
 .comment-section {
   background-color: white;
   margin: 1rem;
-  width: inherit;
-    overflow-x: inherit;
+  overflow-x: inherit;
 }
 
 .comment-body {
@@ -239,5 +234,8 @@ async function deleteComment(commentId) {
 
 .profile-name {
   margin-bottom: 0;
+}
+.capacity-bg {
+  background-color: gray;
 }
 </style>
