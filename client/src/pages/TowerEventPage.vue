@@ -168,7 +168,7 @@ async function deleteComment(commentId) {
             <div>
               <div>Tickets left: {{ towerEvent.capacity - towerEvent.ticketCount }}</div>
             </div>
-            <div v-if="towerEvent.isCanceled == false">
+            <div v-if="towerEvent.isCanceled == false" class="ms-3">
               <button @click.prevent="createTicket()"
                 v-if="!ticketProfiles.some(ticketProfile => ticketProfile.accountId === account?.id && ticketProfile.profile?.id === ticketProfile.accountId)"
                 class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend Event</button>
@@ -264,11 +264,14 @@ async function deleteComment(commentId) {
   
   .attendee-container {
     background-color: #80808154;
+    flex-wrap: wrap;
+      margin-bottom: 2rem;
   }
   
   .lower-section {
     flex-wrap: wrap;
   }
+
 .time-container {
   background-color: #80808154;
   padding: 1rem;

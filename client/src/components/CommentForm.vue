@@ -29,6 +29,7 @@ async function createComment() {
 
 
 <template>
+  <!-- TODO Make sure that the comment is rendered when a comment is created and deleted!!! -->
   <form @submit.prevent="createComment()" class="ps-3 pe-3">
     <div class="mb-3">
       <label for="body" class="form-label">Add a comment</label>

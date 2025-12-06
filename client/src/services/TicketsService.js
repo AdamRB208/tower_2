@@ -8,8 +8,8 @@ class TicketsService {
   async createTicket(ticketData) {
     const response = await api.post('api/tickets', ticketData)
     logger.log('Created Ticket!', response.data)
-    const ticket = new Tickets(response.data)
-    AppState.tickets.push(ticket)
+    const ticket = new TicketProfile(response.data)
+    AppState.ticketProfile.push(ticket)
     AppState.activeTowerEvent.ticketCount++
   }
 

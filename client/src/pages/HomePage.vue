@@ -9,7 +9,7 @@ import { computed, onMounted, ref } from 'vue';
 
 const account = computed(() => AppState.account)
 
-const towerEvent = computed(() => {
+const towerEvents = computed(() => {
   if (filterCategory.value == 'all') {
     return AppState.towerEvent
   }
@@ -94,7 +94,7 @@ async function getTowerEvents() {
       <div class="col-12">
         <h2 class="title-section">Upcoming Events</h2>
       </div>
-      <div v-for="towerEvent in towerEvent" :key="towerEvent.id" class="col-md-4 mb-4 tower-event-card">
+      <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-md-4 mb-4 tower-event-card">
         <TowerEventsCard :towerEvent="towerEvent" />
       </div>
     </div>
