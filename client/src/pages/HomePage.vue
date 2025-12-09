@@ -56,7 +56,7 @@ async function getTowerEvents() {
   <section class="container-fluid">
     <div class="row">
       <div class="col-12 bg-img">
-        <div class="d-flex flex-column header-card w-50 rounded-4">
+        <div class="d-flex flex-column header-card rounded-4">
           <h1 class="p-2">Discover events you're interested in</h1>
           <p class="fs-4 mt-3 p-2">Event management for people, by people.</p>
           <div></div>
@@ -65,7 +65,7 @@ async function getTowerEvents() {
         </div>
       </div>
     </div>
-    <div class="row justify-content-start">
+    <div class="row info-container">
       <div class="col-md-5 fs-2 title-section">How Tower Works</div>
     </div>
     <div class="row d-flex info-container">
@@ -81,7 +81,7 @@ async function getTowerEvents() {
           event</button>
       </div>
     </div>
-    <div class="row row-title justify-content-evenly flex-wrap">
+    <div class="row row-title info-container justify-content-evenly flex-wrap">
       <div class="fs-2 title-section">Explore Top Categories</div>
       <div v-for="type in categories" :key="'filter' + type.name" class="col-auto d-flex mb-3 mt-3"
         style="overflow: none;">
@@ -90,7 +90,7 @@ async function getTowerEvents() {
           type.name }}</div>
       </div>
     </div>
-    <div class="row row-title">
+    <div class="row info-container">
       <div class="col-12">
         <h2 class="title-section">Upcoming Events</h2>
       </div>
@@ -121,6 +121,11 @@ async function getTowerEvents() {
   text-shadow: 2px 2px 4px black;
   margin-top: 10rem;
     margin-left: 2rem;
+    margin-right: 2rem;
+    
+      @media (min-width:770px) {
+        width: 50%;
+      }
 }
 
 // .row-title {
