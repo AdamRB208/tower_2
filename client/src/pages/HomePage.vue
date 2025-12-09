@@ -65,7 +65,7 @@ async function getTowerEvents() {
         </div>
       </div>
     </div>
-    <div class="row justify-content-start ms-5">
+    <div class="row justify-content-start">
       <div class="col-md-5 fs-2 title-section">How Tower Works</div>
     </div>
     <div class="row d-flex info-container">
@@ -111,7 +111,7 @@ async function getTowerEvents() {
   aspect-ratio: 1/1;
   background-position: bottom;
   object-fit: cover;
-  width: fit-content;
+  width: 100%;
   image-rendering: smooth;
 }
 
@@ -126,6 +126,10 @@ async function getTowerEvents() {
 // .row-title {
 //   margin-left: 8rem;
 //   margin-right: 8rem;
+//   @media (min-width: 700px) {
+  //     margin-left: 0rem;
+  //     margin-right: 0rem;
+  //   }
 // }
 
 .title-section {
@@ -136,7 +140,13 @@ async function getTowerEvents() {
 }
 
 .info-container {
-  flex-wrap: nowrap;
+    margin-left: 0rem;
+      margin-right: 2rem;
+    
+      @media (min-width: 770px) {
+        margin-left: 8rem;
+        margin-right: 8rem;
+      }
 }
 .info-card {
   background-color: #ededf1;
