@@ -150,7 +150,7 @@ async function deleteComment(commentId) {
             towerEvent.startDate.toDateString() }}
             @
             {{
-  towerEvent.startDate.toLocaleTimeString() }}</p>
+            towerEvent.startDate.toLocaleTimeString() }}</p>
         </div>
         <div class="location-container rounded-3">
           <p class="fs-4">Location</p>
@@ -188,6 +188,10 @@ async function deleteComment(commentId) {
         <div v-else-if="towerEvent.isCanceled" class="ticket-container rounded p-3 text-center">
           <p class="text-danger">This event has been canceled</p>
         </div>
+        <div v-else-if="canAttendEvent" class="ticket-container rounded p-3 text-center">
+          <p>Interested in attending this event?</p>
+          <button @click.prevent="createTicket()" class="btn btn-success" type="button">Attend Event</button>
+        </div>
         <div v-else class="ticket-container rounded p-3 text-center">
           <button v-if="towerEvent.capacity === towerEvent.ticketCount" class="btn btn-primary" type="button" disabled>
             Sold Out
@@ -195,8 +199,6 @@ async function deleteComment(commentId) {
           <button v-else-if="userHasTicket" class="btn btn-primary" type="button" disabled>
             Attending!
           </button>
-          <button v-else-if="canAttendEvent" @click.prevent="createTicket()" class="btn btn-success"
-            type="button">Attend Event</button>
         </div>
       </div>
     </div>
