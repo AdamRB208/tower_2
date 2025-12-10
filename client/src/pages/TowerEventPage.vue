@@ -104,8 +104,6 @@ async function deleteComment(commentId) {
 }
 
 </script>
-
-
 <template>
   <!-- Event Section Begins Here  -->
 
@@ -131,17 +129,17 @@ async function deleteComment(commentId) {
 
     <!-- Event Details Section Begins Here -->
 
-    <div class="row mb-5 d-flex justify-content-between">
+    <div class="row mb-5 mt-5 d-flex justify-content-between">
       <div class="col-md-3">
-        <div class="time-container">
+        <div class="time-container rounded-3">
           <p class="fs-4">Date and Time</p>
           <p class="text-center"><i class="mdi mdi-clipboard-text-clock-outline fs-4 text-success"></i> {{
             towerEvent.startDate.toDateString() }}
             @
             {{
-            towerEvent.startDate.toLocaleTimeString() }}</p>
+              towerEvent.startDate.toLocaleTimeString() }}</p>
         </div>
-        <div class="location-container">
+        <div class="location-container rounded-3">
           <p class="fs-4">Location</p>
           <p class="text-center"><i class="mdi mdi-map-marker-outline fs-4 text-success"></i>{{ towerEvent.location }}
           </p>
@@ -158,7 +156,8 @@ async function deleteComment(commentId) {
       <!-- Capacity and Ticket Section Begins Here -->
 
       <div class="col-md-3">
-        <div class="capacity-container rounded p-3">
+        <div class="capacity-container text-center rounded p-2">
+          <div class="fs-4">Ticket Details</div>
           <div class="mb-2">
             <div>Event Capacity: {{ towerEvent.capacity }}</div>
           </div>
@@ -167,7 +166,7 @@ async function deleteComment(commentId) {
           </div>
         </div>
         <div class="ticket-container rounded p-3 text-center">
-          <h4>Interested in going?</h4>
+          <div class="fs-4">Interested in going?</div>
           <p>grab a ticket!</p>
           <div v-if="towerEvent.isCanceled == false" class="mt-2 text-center">
             <button @click.prevent="createTicket()"
@@ -182,37 +181,38 @@ async function deleteComment(commentId) {
 
       <!-- Attendee Section Begins Here -->
 
-      <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between lower-section">
-        <div class="attendee-container mt-3 p-3 rounded shadow">
+      <div
+        class="row-fluid mt-5 mb-5 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between lower-section">
+        <div class="col-12 col-md-3">
           <div v-if="towerEvent.ticketCount"
             :title="towerEvent.ticketCount + (towerEvent.ticketCount == 1 ? ' person is ' : ' people are ') + 'attending this event'">
-            <div class="mb-2">Number of attendees: {{ towerEvent.ticketCount }}</div>
+            <div class="mb-2 fw-bold">Number of attendees: {{ towerEvent.ticketCount }}</div>
           </div>
-          <div>
+          <div class="attendee-container mt-3 p-3 fs-5 rounded shadow">
             <div>These people are attending:
               <div v-for="ticketProfile in ticketProfiles" :key="ticketProfile.id"
-                class="d-flex align-items-center mt-2">
+                class="d-flex align-items-center mt-2 fs-6">
                 <img :src="ticketProfile.profile.picture" alt="profile picture" class="attendee-img">
                 <p class="ps-2 profile-name">{{ ticketProfile.profile.name }}</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Comments Section Begins Here -->
+        <!-- Comments Section Begins Here -->
 
-      <div class="col-12 col-md-6 p-2 rounded shadow comment-container">
-        <CommentForm />
-        <div v-for="comments in comment" :key="comments.eventId"
-          class="p-2 rounded shadow border border-1 border-dark comment-box">
-          <div class="d-flex d-inline align-items-center">
-            <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
-            <span class="ms-2">{{ comments.creator.name }}</span>
+        <div class="col-12 col-md-6 p-2 mt-5 rounded shadow comment-container">
+          <CommentForm />
+          <div v-for="comments in comment" :key="comments.eventId"
+            class="p-2 rounded shadow border border-1 border-dark comment-box">
+            <div class="d-flex d-inline align-items-center">
+              <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
+              <span class="ms-2">{{ comments.creator.name }}</span>
+            </div>
+            <p class="comment-body rounded">{{ comments.body }}</p>
+            <button @click="deleteComment(comments.id)" class="btn btn-sm btn-outline-danger comment-btn m-2"
+              type="button">delete</button>
           </div>
-          <p class="comment-body rounded">{{ comments.body }}</p>
-          <button @click="deleteComment(comments.id)" class="btn btn-sm btn-outline-danger comment-btn m-2"
-            type="button">delete</button>
         </div>
       </div>
     </div>
@@ -222,7 +222,7 @@ async function deleteComment(commentId) {
 
 <style lang="scss" scoped>
 .event-img {
-  height: 20em;
+  height: 25em;
   width: 100%;
   object-fit: cover;
   object-position: center;
@@ -255,7 +255,7 @@ async function deleteComment(commentId) {
   background-color: #80808154;
   margin-left: 1rem;
   margin-bottom: 1rem;
-    margin-right: 1rem;
+  margin-right: 1rem;
   }
   
   .comment-body {
@@ -286,16 +286,15 @@ async function deleteComment(commentId) {
 .time-container {
   background-color: #80808154;
   padding: 1rem;
-  border-radius: 5%;
   margin-bottom: 1rem;
 }
 
 .location-container {
   background-color: #80808154;
   padding: 1rem;
-  border-radius: 5%;
   margin-bottom: 1rem;
 }
+
 .ticket-container {
   background-color: #80808154;
 }

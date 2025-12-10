@@ -54,6 +54,8 @@ async function getTowerEvents() {
 
 <template>
   <section class="container-fluid">
+
+    <!-- Header Image Section Begins Here -->
     <div class="row">
       <div class="col-12 bg-img">
         <div class="d-flex flex-column header-card rounded-4">
@@ -65,10 +67,12 @@ async function getTowerEvents() {
         </div>
       </div>
     </div>
+
+    <!-- Info Section Begins Here  -->
     <div class="row info-container">
       <div class="col-md-5 fs-2 title-section">How Tower Works</div>
     </div>
-    <div class="row d-flex info-container">
+    <div class="row d-flex justify-content-around info-container">
       <div class="col-md-4 info-card border border-dark-subtle rounded-2 shadow m-3 p-2">
         <h3>Discover events your interested in</h3>
         <p>Browse through community hosted events for all the things you love</p>
@@ -81,6 +85,8 @@ async function getTowerEvents() {
           event</button>
       </div>
     </div>
+
+    <!-- Category Section Begins Here -->
     <div class="row row-title info-container justify-content-evenly flex-wrap">
       <div class="fs-2 title-section">Explore Top Categories</div>
       <div v-for="type in categories" :key="'filter' + type.name" class="col-auto d-flex mb-3 mt-3"
@@ -90,6 +96,8 @@ async function getTowerEvents() {
           type.name }}</div>
       </div>
     </div>
+
+    <!-- Events Section Begins Here -->
     <div class="row info-container">
       <div class="col-12">
         <h2 class="title-section">Upcoming Events</h2>
@@ -127,15 +135,6 @@ async function getTowerEvents() {
         width: 50%;
       }
 }
-
-// .row-title {
-//   margin-left: 8rem;
-//   margin-right: 8rem;
-//   @media (min-width: 700px) {
-  //     margin-left: 0rem;
-  //     margin-right: 0rem;
-  //   }
-// }
 
 .title-section {
   margin-top: 5rem;
