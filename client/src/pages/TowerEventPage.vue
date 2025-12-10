@@ -131,7 +131,7 @@ async function deleteComment(commentId) {
 
     <!-- Event Details Section Begins Here -->
 
-    <div class="row mb-5">
+    <div class="row mb-5 d-flex justify-content-between">
       <div class="col-md-3">
         <div class="time-container">
           <p class="fs-4">Date and Time</p>
@@ -154,12 +154,10 @@ async function deleteComment(commentId) {
           </button>
         </div>
       </div>
-    </div>
 
-    <!-- Capacity and Attendee Section Begins Here -->
+      <!-- Capacity and Ticket Section Begins Here -->
 
-    <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between lower-section">
-      <div class="col-12 col-md-3">
+      <div class="col-md-3">
         <div class="capacity-container rounded p-3">
           <div class="mb-2">
             <div>Event Capacity: {{ towerEvent.capacity }}</div>
@@ -167,6 +165,10 @@ async function deleteComment(commentId) {
           <div>
             <div>Tickets left: {{ towerEvent.capacity - towerEvent.ticketCount }}</div>
           </div>
+        </div>
+        <div class="ticket-container rounded p-3 text-center">
+          <h4>Interested in going?</h4>
+          <p>grab a ticket!</p>
           <div v-if="towerEvent.isCanceled == false" class="mt-2 text-center">
             <button @click.prevent="createTicket()"
               v-if="!ticketProfiles.some(ticketProfile => ticketProfile.accountId === account?.id && ticketProfile.profile?.id === ticketProfile.accountId)"
@@ -176,6 +178,11 @@ async function deleteComment(commentId) {
             <button v-else class="btn btn-success btn-sm" type="button" disabled>Attending!</button>
           </div>
         </div>
+      </div>
+
+      <!-- Attendee Section Begins Here -->
+
+      <div class="row-fluid mt-4 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between lower-section">
         <div class="attendee-container mt-3 p-3 rounded shadow">
           <div v-if="towerEvent.ticketCount"
             :title="towerEvent.ticketCount + (towerEvent.ticketCount == 1 ? ' person is ' : ' people are ') + 'attending this event'">
@@ -263,6 +270,7 @@ async function deleteComment(commentId) {
   
   .capacity-container {
     background-color: #80808154;
+    margin-bottom: 1rem;
   }
   
   .attendee-container {
@@ -287,5 +295,8 @@ async function deleteComment(commentId) {
   padding: 1rem;
   border-radius: 5%;
   margin-bottom: 1rem;
+}
+.ticket-container {
+  background-color: #80808154;
 }
 </style>;
