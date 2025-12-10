@@ -80,7 +80,7 @@ async function getTowerEvents() {
       <div class="col-md-4 info-card border border-dark-subtle rounded-2 shadow m-3 p-2">
         <h3>Start an event to invite your friends</h3>
         <p>Create your own Tower event, and draw form a community of millions</p>
-        <button v-if="account" class="btn btn-outline-success shadow-lg text-shadow-lg align-items-center" role="button"
+        <button v-if="account" class="btn btn-vue shadow-lg text-shadow-lg align-items-center" role="button"
           title="Create new tower event" data-bs-toggle="modal" data-bs-target="#ModalComponent">Create an
           event</button>
       </div>
@@ -92,7 +92,8 @@ async function getTowerEvents() {
       <div v-for="type in categories" :key="'filter' + type.name" class="col-auto d-flex mb-3 mt-3"
         style="overflow: none;">
         <div @click="filterCategory = type.name"
-          class="fs-4 rounded-2 shadow category-btn text-center btn btn-outline-vue" role="button">{{
+ class="fs-4 rounded-2 shadow category-btn text-center btn btn-vue"
+          role="button" :title="`button for ${type.name}`">{{
           type.name }}</div>
       </div>
     </div>
@@ -100,7 +101,7 @@ async function getTowerEvents() {
     <!-- Events Section Begins Here -->
     <div class="row info-container">
       <div class="col-12">
-        <h2 class="title-section">Upcoming Events</h2>
+        <div class="title-section fs-2xs">Upcoming Events</div>
       </div>
       <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-md-4 mb-4 tower-event-card">
         <TowerEventsCard :towerEvent="towerEvent" />

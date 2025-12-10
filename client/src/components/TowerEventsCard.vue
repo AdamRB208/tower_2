@@ -10,7 +10,8 @@ defineProps({
 
 <template>
   <div class="event-card border border-2 border-dark-subtle shadow-lg">
-    <RouterLink :to="{ name: 'Events', params: { towerEventId: towerEvent.id } }">
+    <RouterLink :to="{ name: 'Events', params: { towerEventId: towerEvent.id } }"
+      aria-label="Read more about this event">
       <div class="image-container" :style="{ backgroundImage: `url(${towerEvent.coverImg})` }">
         <p v-if="towerEvent.isCanceled" class="notification-text canceled-bg">CANCELED!</p>
         <p v-if="towerEvent.ticketCount == towerEvent.capacity" class="notification-text sold-out-bg">SOLD OUT!</p>
