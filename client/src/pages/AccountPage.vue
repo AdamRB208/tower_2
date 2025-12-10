@@ -9,6 +9,13 @@ const account = computed(() => AppState.account)
 
 const ticketEvents = computed(() => AppState.ticketEvent)
 
+const userTicketCount = computed(() => AppState.ticketEvent.length)
+
+const usersEvents = computed(() => {
+  return AppState.towerEvent.filter(event => event.creatorId === account.value?.id)
+})
+
+const usersEventCount = computed(() => usersEvents.value.length)
 
 
 onMounted(() => {
@@ -49,10 +56,16 @@ async function deleteTicket(ticketId) {
           <img class="d-flex d-column rounded account-img" :src="account.picture"
             :alt="`profile image for ${account.name}`" />
         </div>
-        <h1 class="d-flex align-items-center ms-3">{{ account.name }}</h1>
+        <div>
+          <h1 class="d-flex align-items-center ms-3">{{ account.name }}</h1>
+          <div class="d-flex justify-content-center">
+            <p v-if="usersEventCount" class="pe-3">{{ usersEventCount }} events</p>
+            <p v-if="userTicketCount">{{ userTicketCount }} tickets</p>
+          </div>
+        </div>
       </div>
       <div v-for="ticketEvent in ticketEvents" :key="ticketEvent.id"
-        class="col-md-2 m-2 border border-2 border-dark-subtle d-flex flex-column p-0">
+        class="col-10 col-md-3 ticket-card m-2 border border-2 border-dark-subtle rounded-2 shadow-sm d-flex flex-column p-0">
         <img :src="ticketEvent.event.coverImg" :alt="`display image for ${ticketEvent.event.name}`"
           class="ticket-event-img">
         <div class="fw-bold text-uppercase p-1">{{ ticketEvent.event.name }}</div>
@@ -77,9 +90,10 @@ async function deleteTicket(ticketId) {
   height: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
+  border-radius: 3.5px 3.5px 0px 0px;
 }
 
-.col-md-2 {
-  justify-content: space-evenly;
+.ticket-card {
+  background-color: #ededf1;
 }
 </style>

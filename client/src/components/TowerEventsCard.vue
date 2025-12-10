@@ -34,7 +34,7 @@ defineProps({
   background-size: cover;
   background-position: center;
     position: relative;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 3.5px 3.5px 0px 0px;
   }
   
   .notification-text {
