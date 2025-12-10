@@ -19,6 +19,7 @@ export class TicketController extends BaseController {
    * @param {import("express").NextFunction} next
    */
 
+  // FIXME make sure that un-logged in users get prompt if ticket is attempted to be obtained W/O login
   async createTicket(request, response, next) {
     try {
       const ticketData = request.body

@@ -7,7 +7,7 @@ import { ticketService } from '@/services/TicketsService.js';
 
 const account = computed(() => AppState.account)
 
-const ticketEvent = computed(() => AppState.ticketEvent)
+const ticketEvents = computed(() => AppState.ticketEvent)
 
 
 
@@ -51,7 +51,7 @@ async function deleteTicket(ticketId) {
         </div>
         <h1 class="d-flex align-items-center ms-3">{{ account.name }}</h1>
       </div>
-      <div v-for="ticketEvent in ticketEvent" :key="ticketEvent.id"
+      <div v-for="ticketEvent in ticketEvents" :key="ticketEvent.id"
         class="col-md-2 m-2 border border-2 border-dark-subtle d-flex flex-column p-0">
         <img :src="ticketEvent.event.coverImg" :alt="`display image for ${ticketEvent.event.name}`"
           class="ticket-event-img">

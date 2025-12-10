@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import CommentForm from '@/components/CommentForm.vue';
+import Login from '@/components/Login.vue';
 import { commentService } from '@/services/CommentService.js';
 import { ticketService } from '@/services/TicketsService.js';
 import { towerEventsService } from '@/services/TowerEventsService.js';
@@ -17,8 +18,20 @@ const account = computed(() => AppState.account)
 
 const ticketProfiles = computed(() => AppState.ticketProfile)
 
-
 const comment = computed(() => AppState.comments)
+
+const userHasTicket = computed(() => {
+  if (!account.value) return false
+  return ticketProfiles.value.some(
+    ticket => ticket.accountId === account.value.id
+  )
+})
+
+const canAttendEvent = computed(() => {
+  return account.value &&
+    !userHasTicket.value &&
+    !towerEvent.value.isCanceled
+})
 
 const route = useRoute()
 
@@ -137,7 +150,7 @@ async function deleteComment(commentId) {
             towerEvent.startDate.toDateString() }}
             @
             {{
-              towerEvent.startDate.toLocaleTimeString() }}</p>
+  towerEvent.startDate.toLocaleTimeString() }}</p>
         </div>
         <div class="location-container rounded-3">
           <p class="fs-4">Location</p>
@@ -165,57 +178,65 @@ async function deleteComment(commentId) {
             <div>Tickets left: {{ towerEvent.capacity - towerEvent.ticketCount }}</div>
           </div>
         </div>
-        <div class="ticket-container rounded p-3 text-center">
+        <div v-if="!account" class="ticket-container rounded p-3 text-center">
           <div class="fs-4">Interested in going?</div>
-          <p>grab a ticket!</p>
-          <div v-if="towerEvent.isCanceled == false" class="mt-2 text-center">
-            <button @click.prevent="createTicket()"
-              v-if="!ticketProfiles.some(ticketProfile => ticketProfile.accountId === account?.id && ticketProfile.profile?.id === ticketProfile.accountId)"
-              class="btn btn-success btn-sm mdi mdi-account-plus" type="button">Attend Event</button>
-            <button v-else-if="towerEvent.capacity === towerEvent.ticketCount" class="btn btn-primary btn-sm"
-              disabled>Sold Out</button>
-            <button v-else class="btn btn-success btn-sm" type="button" disabled>Attending!</button>
-          </div>
+          <p>Please log in to attend an event!</p>
+          <button class="btn btn-success" type="button">
+            <Login />
+          </button>
         </div>
-      </div>
-
-      <!-- Attendee Section Begins Here -->
-
-      <div
-        class="row-fluid mt-5 mb-5 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between lower-section">
-        <div class="col-12 col-md-3">
-          <div v-if="towerEvent.ticketCount"
-            :title="towerEvent.ticketCount + (towerEvent.ticketCount == 1 ? ' person is ' : ' people are ') + 'attending this event'">
-            <div class="mb-2 fw-bold">Number of attendees: {{ towerEvent.ticketCount }}</div>
-          </div>
-          <div class="attendee-container mt-3 p-3 fs-5 rounded shadow">
-            <div>These people are attending:
-              <div v-for="ticketProfile in ticketProfiles" :key="ticketProfile.id"
-                class="d-flex align-items-center mt-2 fs-6">
-                <img :src="ticketProfile.profile.picture" alt="profile picture" class="attendee-img">
-                <p class="ps-2 profile-name">{{ ticketProfile.profile.name }}</p>
-              </div>
-            </div>
-          </div>
+        <div v-else-if="towerEvent.isCanceled" class="ticket-container rounded p-3 text-center">
+          <p class="text-danger">This event has been canceled</p>
         </div>
-
-        <!-- Comments Section Begins Here -->
-
-        <div class="col-12 col-md-6 p-2 mt-5 rounded shadow comment-container">
-          <CommentForm />
-          <div v-for="comments in comment" :key="comments.eventId"
-            class="p-2 rounded shadow border border-1 border-dark comment-box">
-            <div class="d-flex d-inline align-items-center">
-              <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
-              <span class="ms-2">{{ comments.creator.name }}</span>
-            </div>
-            <p class="comment-body rounded">{{ comments.body }}</p>
-            <button @click="deleteComment(comments.id)" class="btn btn-sm btn-outline-danger comment-btn m-2"
-              type="button">delete</button>
-          </div>
+        <div v-else class="ticket-container rounded p-3 text-center">
+          <button v-if="towerEvent.capacity === towerEvent.ticketCount" class="btn btn-primary" type="button" disabled>
+            Sold Out
+          </button>
+          <button v-else-if="userHasTicket" class="btn btn-primary" type="button" disabled>
+            Attending!
+          </button>
+          <button v-else-if="canAttendEvent" @click.prevent="createTicket()" class="btn btn-success"
+            type="button">Attend Event</button>
         </div>
       </div>
     </div>
+
+    <!-- Attendee Section Begins Here -->
+
+    <div class="row-fluid mt-5 mb-5 ms-1 me-1 rounded-3 d-flex flex-row-reverse justify-content-between lower-section">
+      <div class="col-12 col-md-3">
+        <div v-if="towerEvent.ticketCount"
+          :title="towerEvent.ticketCount + (towerEvent.ticketCount == 1 ? ' person is ' : ' people are ') + 'attending this event'">
+          <div class="mb-2 fw-bold">Number of attendees: {{ towerEvent.ticketCount }}</div>
+        </div>
+        <div class="attendee-container mt-3 p-3 fs-5 rounded shadow">
+          <div>These people are attending:
+            <div v-for="ticketProfile in ticketProfiles" :key="ticketProfile.id"
+              class="d-flex align-items-center mt-2 fs-6">
+              <img :src="ticketProfile.profile.picture" alt="profile picture" class="attendee-img">
+              <p class="ps-2 profile-name">{{ ticketProfile.profile.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comments Section Begins Here -->
+
+      <div class="col-12 col-md-6 p-2 mt-5 rounded shadow comment-container">
+        <CommentForm />
+        <div v-for="comments in comment" :key="comments.eventId"
+          class="p-2 rounded shadow border border-1 border-dark comment-box">
+          <div class="d-flex d-inline align-items-center">
+            <img :src="comments.creator.picture" alt="" class="creator-img mt-2">
+            <span class="ms-2">{{ comments.creator.name }}</span>
+          </div>
+          <p class="comment-body rounded">{{ comments.body }}</p>
+          <button @click="deleteComment(comments.id)" class="btn btn-sm btn-outline-danger comment-btn m-2"
+            type="button">delete</button>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
   </section>
 </template>
 
@@ -256,32 +277,32 @@ async function deleteComment(commentId) {
   margin-left: 1rem;
   margin-bottom: 1rem;
   margin-right: 1rem;
-  }
-  
-  .comment-body {
-    margin: 2rem;
-    background-color: white;
-    padding: 1rem;
-  }
-  
-  .profile-name {
-    margin-bottom: 0;
-  }
-  
-  .capacity-container {
-    background-color: #80808154;
-    margin-bottom: 1rem;
-  }
-  
-  .attendee-container {
-    background-color: #80808154;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-  }
-  
-  .lower-section {
-    flex-wrap: wrap;
-  }
+}
+
+.comment-body {
+  margin: 2rem;
+  background-color: white;
+  padding: 1rem;
+}
+
+.profile-name {
+  margin-bottom: 0;
+}
+
+.capacity-container {
+  background-color: #80808154;
+  margin-bottom: 1rem;
+}
+
+.attendee-container {
+  background-color: #80808154;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.lower-section {
+  flex-wrap: wrap;
+}
 
 .time-container {
   background-color: #80808154;
